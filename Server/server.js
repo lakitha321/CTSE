@@ -5,7 +5,8 @@ const cors = require('cors');
 const app = express();
 require('dotenv').config();
 
-const prodRouter = require("./routes/orders");
+const studentRouter = require("./routes/it20222154/students");
+const noticeRouter = require("./routes/it20202286/notices");
 
 const PORT = process.env.PORT || 8040;
 
@@ -27,7 +28,8 @@ connection.once("open", () => {
   console.log('MongoDB Connection Success!!!')
 });
 
-app.use("/orders", prodRouter);
+app.use("/students", studentRouter);
+app.use("/notices", noticeRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is up and running at port no: ${PORT}`)
