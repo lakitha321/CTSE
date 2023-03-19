@@ -6,7 +6,9 @@ const app = express();
 require('dotenv').config();
 
 // const studentRouter = require("./routes/it20222154/students");
-// const noticeRouter = require("./routes/it20202286/notices");
+const noticeRouter = require("./routes/it20202286/notices");
+const attendanceRouter = require("./routes/it20183004/attendances");
+const paymentRouter = require("./routes/it20182700/payments");
 
 const PORT = process.env.PORT || 8040;
 
@@ -29,7 +31,9 @@ connection.once("open", () => {
 });
 
 // app.use("/students", studentRouter);
-// app.use("/notices", noticeRouter);
+app.use("/notices", noticeRouter);
+app.use("/attendance", attendanceRouter);
+app.use("/payments", paymentRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is up and running at port no: ${PORT}`)
