@@ -5,9 +5,15 @@ import {NavigationContainer} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import Home from './screens/home';
+
 import Start1 from './screens/it20182700/start';
+import Scanner from './screens/it20182700/scanner';
+import QRCode from './screens/it20182700/sample_qr_gen';
+
 import Start2 from './screens/it20183004/start';
+
 import Start3 from './screens/it20202286/start';
+
 import Start4 from './screens/it20222154/start';
 
 const Stack = createStackNavigator();
@@ -21,10 +27,17 @@ export default function App() {
           component={Home}
           options={{title: 'Welcome'}}
         />
+
         <Stack.Screen name="Start1" component={Start1} />
+        <Stack.Screen name="Scanner" component={Scanner} />
+        <Stack.Screen name="QRCode" component={QRCode} />
+
         <Stack.Screen name="Start2" component={Start2} />
+
         <Stack.Screen name="Start3" component={Start3} />
+
         <Stack.Screen name="Start4" component={Start4} />
+
       </Stack.Navigator>
     </NavigationContainer>
   );
