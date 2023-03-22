@@ -2,17 +2,25 @@ import React from "react";
 import {
   StyleSheet,
   View,
-  Text
+  Text,
+  Pressable
 } from "react-native";
 
 
-const App = () => {
+const App = ({navigation}) => {
 
   return(
     <>
     <View>
       <Text style={styles.headertext}>SANDUNI</Text>
+      <Pressable  onPress={()=>{navigation.navigate('Register')}}>
+        <View >
+        
+        </View>
+        <Text >Registration form</Text>
+        </Pressable>
     </View>
+    
     </>
   )
 }

@@ -16,6 +16,7 @@ import Start2 from './screens/it20183004/start';
 import Start3 from './screens/it20202286/start';
 
 import Start4 from './screens/it20222154/start';
+import Register from './screens/it20222154/registration';
 
 const Stack = createStackNavigator();
 
@@ -39,6 +40,7 @@ export default function App() {
         <Stack.Screen name="Start3" component={Start3} />
 
         <Stack.Screen name="Start4" component={Start4} />
+        <Stack.Screen name="Register" component={Register} />
 
       </Stack.Navigator>
     </NavigationContainer>
