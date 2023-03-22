@@ -133,9 +133,7 @@ const RegistrationForm = () => {
       </TouchableOpacity>
       </View>
 
-      <TouchableOpacity onPress={showDatePicker}>
-        <Text style={styles.label}>Registered Date: {registeredDate ? registeredDate: 'Select a date'}</Text>
-      </TouchableOpacity>
+     
       <TouchableOpacity style={styles.button} onPress={handleSubmit}>
         <Text style={styles.buttonText}>Submit</Text>
       </TouchableOpacity>
