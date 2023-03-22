@@ -8,8 +8,12 @@ const router = express.Router();
 router.post(
     '/upload',
     async (req, res) => {
+
+    var today = new Date();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+
       try {
-        const { student_name, parent_name, student_phone, parent_phone, nic, student_email, parent_email, password ,registered_date,batch} = req.body;
+        const { student_name, parent_name, student_phone, parent_phone, nic, student_email, parent_email, password ,batch} = req.body;
         const newStudent = new Student({
           student_name,
           parent_name,
@@ -19,7 +23,7 @@ router.post(
           student_email,
           parent_email,
           password,
-          registered_date,
+          registered_date:date,
           batch
         });
         await newStudent.save();
@@ -87,11 +91,14 @@ router.post(
   });
   
   router.route('/edit/:id').put(async (req, res) => {
+
+    var today = new Date();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
   
     let id = req.params.id;
-    const { student_name, parent_name, student_phone, parent_phone, nic, student_email, parent_email,batch ,registered_date} = req.body;
+    const { student_name, parent_name, student_phone, parent_phone, nic, student_email, parent_email,batch} = req.body;
 
-    const update = await Student.findByIdAndUpdate(id, {student_name:student_name, parent_name:parent_name, student_phone:student_phone, parent_phone:parent_phone, nic:nic, student_email:student_email, parent_email:parent_email, batch:batch, registered_date:registered_date}).then(()=>{
+    const update = await Student.findByIdAndUpdate(id, {student_name:student_name, parent_name:parent_name, student_phone:student_phone, parent_phone:parent_phone, nic:nic, student_email:student_email, parent_email:parent_email, batch:batch, registered_date:date}).then(()=>{
         res.json("Updated");
     }).catch((err)=>{
         res.json("Error");

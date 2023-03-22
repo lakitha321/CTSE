@@ -41,21 +41,9 @@ const RegistrationForm = () => {
         student_email: studentEmail,
         parent_email: parentEmail,
         password: password,
-        registered_date: 'registeredDate',
-        batch: 'batch'
+        batch: batch
     }
-    await axios.post('https://ctse-node-server.herokuapp.com/students/upload', {
-      student_name: "aaaaaaaaaaaaaaaa",
-      parent_name: "test",
-      student_phone: "079284672",
-      parent_phone: "079284672",
-      nic: "1253725341",
-      student_email: "sanduni@email.com",
-      parent_email: "test@email.com",
-      password: "123",
-      registered_date: "123",
-      batch: "123"
-  })
+    await axios.post('https://ctse-node-server.herokuapp.com/students/upload', newStudent)
     .then(response => {
       Alert.alert(response.data);
     })
@@ -127,32 +115,30 @@ const RegistrationForm = () => {
         onChangeText={setPassword}
         secureTextEntry={true}
       />
+      <Text style={styles.label}>Batch : {batch}</Text>
+      <View
+      style={{
+          flexDirection: 'row',
+          height: 80,
+          padding: 20,
+      }}>
+      <TouchableOpacity style={styles.button2} onPress={() => setBatch('A/L2023')}>
+      <Text style={styles.button2Text}>A/L2023</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button2} onPress={() => setBatch('A/L2024')}>
+      <Text style={styles.button2Text}>A/L2024</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button2} onPress={() => setBatch('A/L2025')}>
+      <Text style={styles.button2Text}>A/L2025</Text>
+      </TouchableOpacity>
+      </View>
 
       <TouchableOpacity onPress={showDatePicker}>
         <Text style={styles.label}>Registered Date: {registeredDate ? registeredDate: 'Select a date'}</Text>
-</TouchableOpacity>
-{/* <DateTimePickerModal
-     isVisible={isDatePickerVisible}
-     mode="date"
-     onConfirm={handleConfirm}
-     onCancel={hideDatePicker}
-   /> */}
-
-{/* <Text style={styles.label}>Batch</Text> */}
-{/* <Picker
-  style={styles.input}
-  selectedValue={batch}
-  onValueChange={(itemValue, itemIndex) => setBatch(itemValue)}
->
-  <Picker.Item label="A/L 2023" value="A/L2023" />
-  <Picker.Item label="A/L 2024" value="A/L2024" />
-  <Picker.Item label="O/L 2023" value="O/L2023" />
-</Picker> */}
-
-
-  <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-    <Text style={styles.buttonText}>Submit</Text>
-  </TouchableOpacity>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+        <Text style={styles.buttonText}>Submit</Text>
+      </TouchableOpacity>
   </ScrollView>
 </View>
 );
@@ -183,6 +169,17 @@ backgroundColor: '#008080',
 padding: 10,
 borderRadius: 5,
 marginTop: 20,
+},
+button2: {
+  marginRight: 5,
+  backgroundColor: 'black',
+  padding: 10,
+  borderRadius: 5,
+},
+button2Text: {
+color: 'white',
+fontSize: 16,
+textAlign: 'center',
 },
 buttonText: {
 color: '#fff',

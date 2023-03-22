@@ -14,7 +14,7 @@ import {
 const App = () => {
 
     const currentYear = new Date().getFullYear();
-    const [year, setYear] = useState(currentYear)
+    const [year, setYear] = useState(currentYear);
 
     const route = useRoute();
     return (
