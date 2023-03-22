@@ -35,7 +35,7 @@ const studentSchema = new mongoose.Schema(
         required: true
     },
     registered_date:{
-      type:Date,
+      type:String,
       required: true
     },
     batch:{

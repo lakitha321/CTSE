@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert,Picker } from 'react-native';
-import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ScrollView } from 'react-native';
+// import DateTimePickerModal from "react-native-modal-datetime-picker";
 import axios from 'axios';
 
 const RegistrationForm = () => {
@@ -42,14 +42,22 @@ const RegistrationForm = () => {
         parent_email: parentEmail,
         password: password,
         registered_date: 'registeredDate',
-        batch: batch
+        batch: 'batch'
     }
-
-   
-
-    await axios.post('https://ctse-node-server.herokuapp.com/students/upload', newStudent)
+    await axios.post('https://ctse-node-server.herokuapp.com/students/upload', {
+      student_name: "aaaaaaaaaaaaaaaa",
+      parent_name: "test",
+      student_phone: "079284672",
+      parent_phone: "079284672",
+      nic: "1253725341",
+      student_email: "sanduni@email.com",
+      parent_email: "test@email.com",
+      password: "123",
+      registered_date: "123",
+      batch: "123"
+  })
     .then(response => {
-      Alert.alert('Registration Successful', 'Student registered successfully!');
+      Alert.alert(response.data);
     })
     .catch(error => {
       Alert.alert('Registration Failed', 'Student registration failed. Please try again.');
@@ -58,6 +66,7 @@ const RegistrationForm = () => {
 
   return (
     <View style={styles.container}>
+      <ScrollView>
       <Text style={styles.label}>Student Name</Text>
       <TextInput
         style={styles.input}
@@ -122,15 +131,15 @@ const RegistrationForm = () => {
       <TouchableOpacity onPress={showDatePicker}>
         <Text style={styles.label}>Registered Date: {registeredDate ? registeredDate: 'Select a date'}</Text>
 </TouchableOpacity>
-<DateTimePickerModal
+{/* <DateTimePickerModal
      isVisible={isDatePickerVisible}
      mode="date"
      onConfirm={handleConfirm}
      onCancel={hideDatePicker}
-   />
+   /> */}
 
-<Text style={styles.label}>Batch</Text>
-<Picker
+{/* <Text style={styles.label}>Batch</Text> */}
+{/* <Picker
   style={styles.input}
   selectedValue={batch}
   onValueChange={(itemValue, itemIndex) => setBatch(itemValue)}
@@ -138,12 +147,13 @@ const RegistrationForm = () => {
   <Picker.Item label="A/L 2023" value="A/L2023" />
   <Picker.Item label="A/L 2024" value="A/L2024" />
   <Picker.Item label="O/L 2023" value="O/L2023" />
-</Picker>
+</Picker> */}
 
 
   <TouchableOpacity style={styles.button} onPress={handleSubmit}>
     <Text style={styles.buttonText}>Submit</Text>
   </TouchableOpacity>
+  </ScrollView>
 </View>
 );
 };
