@@ -12,7 +12,7 @@ const App = () => {
     <View style={styles.container}>
       <View style={styles.barcodebox}>
         <QRCode
-        value="Hi im lakitha"
+        value="64157ce58156e34dfcd66ea0"
         size={200}
         bgColor="#000"
         fgColor="#fff"
@@ -21,7 +21,7 @@ const App = () => {
     </View>
   );
 }
-
+// react-native-svg@13.8.0 - expected version: 13.4.0 react-native-svg@13.4.0
 const styles = StyleSheet.create({
     container: {
     flex: 1,

@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Button } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import axios from 'axios';
 
 export default function App() {
+
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [text, setText] = useState('Not yet scanned')
+
+  const [student, setStudent] = useState(null);
 
   const askForCameraPermission = () => {
     (async () => {
@@ -13,6 +17,18 @@ export default function App() {
       setHasPermission(status === 'granted');
     })()
   }
+
+  const getStudent = async (id) => {
+    try {
+      const response = await axios.get(
+        `https://ctse-node-server.herokuapp.com/students/get/${id}`,
+      );
+      setStudent(response.data);
+    } catch (error) {
+      // handle error
+      alert(error.message);
+    }
+  };
 
   // Request Camera Permission
   useEffect(() => {
@@ -51,7 +67,19 @@ export default function App() {
       </View>
       <Text style={styles.maintext}>{text}</Text>
 
-      {scanned && <Button title={'Tap to Scan'} onPress={() => setScanned(false)} color='blue' />}
+      {scanned && 
+      <>
+      <Button title={'Tap to Scan'} onPress={() => setScanned(false)} color='blue' />
+      <Text style={styles.maintext}></Text>
+      <Button title={'Fetch Student'} onPress={() => getStudent(text)} color='blue' />
+      {student &&
+      <>
+        <Text style={styles.maintext}>{student.student_name}</Text>
+        <Button title={'Fetch Student'} onPress={() => getStudent(text)} color='blue' />
+      </>
+      }
+      </>
+      }
     </View>
   );
 }

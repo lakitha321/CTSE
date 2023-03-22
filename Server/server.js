@@ -5,7 +5,7 @@ const cors = require('cors');
 const app = express();
 require('dotenv').config();
 
-// const studentRouter = require("./routes/it20222154/students");
+const studentRouter = require("./routes/it20222154/students");
 const noticeRouter = require("./routes/it20202286/notices");
 const attendanceRouter = require("./routes/it20183004/attendances");
 const paymentRouter = require("./routes/it20182700/payments");
@@ -30,7 +30,7 @@ connection.once("open", () => {
   console.log('MongoDB Connection Success!!!')
 });
 
-// app.use("/students", studentRouter);
+app.use("/students", studentRouter);
 app.use("/notices", noticeRouter);
 app.use("/attendance", attendanceRouter);
 app.use("/payments", paymentRouter);

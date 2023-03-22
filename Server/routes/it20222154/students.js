@@ -78,6 +78,16 @@ router.post(
       res.json('Error while getting list of Students. Try again later.');
     }
   });
+
+  router.get('/get/:id', async (req, res) => {
+    try {
+      const Stud = await Student.findById(req.params.id);
+      res.send(Stud);
+      console.log(Stud.student_name);
+    } catch (error) {
+      res.json('Error while getting list of Students. Try again later.');
+    }
+  });
   
   router.route('/delete/:id').delete(async (req, res) => {
   

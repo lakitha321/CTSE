@@ -7,14 +7,15 @@ router.post(
     '/upload',
     async (req, res) => {
       try {
-        const { date, time, price, status, sid, month} = req.body;
+        const { date, time, price, status, sid, month, year} = req.body;
         const newPayment = new Payment({
           date,
           time,
           price,
           status,
           sid,
-          month
+          month,
+          year
         });
         await newPayment.save();
         res.json('Saved');
@@ -32,7 +33,10 @@ router.post(
   router.get('/getAll', async (req, res) => {
     try {
       const Payments = await Payment.find({});
-      res.send(Payments);
+      const sortedByCreationDate = Payments.sort(
+      (a, b) => b.createdAt - a.createdAt
+      );
+      res.send(sortedByCreationDate);
     } catch (error) {
       res.json('Error while getting list of Payments. Try again later.');
     }
@@ -57,9 +61,9 @@ router.post(
   router.route('/edit/:id').put(async (req, res) => {
   
     let id = req.params.id;
-    const { date, time, price, status, sid, month} = req.body;
+    const { date, time, price, status, sid, month, year} = req.body;
 
-    const update = await Payment.findByIdAndUpdate(id, {date:date, time:time, price:price, status:status, sid:sid, month:month}).then(()=>{
+    const update = await Payment.findByIdAndUpdate(id, {date:date, time:time, price:price, status:status, sid:sid, month:month, year:year}).then(()=>{
         res.json("Updated");
     }).catch((err)=>{
         res.json("Error");
