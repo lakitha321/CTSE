@@ -9,6 +9,7 @@ import Home from './screens/home';
 import Start1 from './screens/it20182700/start';
 import Scanner from './screens/it20182700/scanner';
 import QRCode from './screens/it20182700/sample_qr_gen';
+import MakePayment from './screens/it20182700/makePayment';
 
 import Start2 from './screens/it20183004/start';
 
@@ -31,6 +32,7 @@ export default function App() {
         <Stack.Screen name="Start1" component={Start1} />
         <Stack.Screen name="Scanner" component={Scanner} />
         <Stack.Screen name="QRCode" component={QRCode} />
+        <Stack.Screen name="MakePayment" component={MakePayment} />
 
         <Stack.Screen name="Start2" component={Start2} />
 

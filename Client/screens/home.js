@@ -59,6 +59,46 @@ const App = ({navigation}) => {
         <Text style={styles.subheadertext}>Pinindu</Text>
         </Pressable>
         <Text>    </Text>
+        <Pressable style={styles.button} onPress={()=>{navigation.navigate('Start3')}}>
+        <View style={styles.headcontainer}>
+          <Image
+            style={styles.headLogo}
+            // source={require('../App/images/meat.png')}
+          />
+        </View>
+        <Text style={styles.subheadertext}>Pinindu</Text>
+        </Pressable>
+        <Text>    </Text>
+        <Pressable style={styles.button} onPress={()=>{navigation.navigate('Start3')}}>
+        <View style={styles.headcontainer}>
+          <Image
+            style={styles.headLogo}
+            // source={require('../App/images/meat.png')}
+          />
+        </View>
+        <Text style={styles.subheadertext}>Pinindu</Text>
+        </Pressable>
+        <Text>    </Text>
+        <Pressable style={styles.button} onPress={()=>{navigation.navigate('Start3')}}>
+        <View style={styles.headcontainer}>
+          <Image
+            style={styles.headLogo}
+            // source={require('../App/images/meat.png')}
+          />
+        </View>
+        <Text style={styles.subheadertext}>Pinindu</Text>
+        </Pressable>
+        <Text>    </Text>
+        <Pressable style={styles.button} onPress={()=>{navigation.navigate('Start3')}}>
+        <View style={styles.headcontainer}>
+          <Image
+            style={styles.headLogo}
+            // source={require('../App/images/meat.png')}
+          />
+        </View>
+        <Text style={styles.subheadertext}>Pinindu</Text>
+        </Pressable>
+        <Text>    </Text>
         </ScrollView>
     <Text>    </Text>
     </View>

@@ -41,6 +41,22 @@ router.post(
       res.json('Error while getting list of Payments. Try again later.');
     }
   });
+
+  router.get('/get/:sid/:y', async (req, res) => {
+    try {
+      const Payments = await Payment.find({
+        sid:req.params.sid,
+        year:req.params.y
+      });
+      const sortedByCreationDate = Payments.sort(
+        (a, b) => b.createdAt - a.createdAt
+      );
+      res.send(sortedByCreationDate);
+      console.log(Stud.student_name);
+    } catch (error) {
+      res.json('Error while getting list of Students. Try again later.');
+    }
+  });
   
   router.route('/delete/:id').delete(async (req, res) => {
   

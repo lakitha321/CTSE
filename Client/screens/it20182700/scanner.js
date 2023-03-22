@@ -3,7 +3,7 @@ import { Text, View, StyleSheet, Button } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import axios from 'axios';
 
-export default function App() {
+export default function App({navigation}) {
 
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
@@ -28,6 +28,12 @@ export default function App() {
       // handle error
       alert(error.message);
     }
+  };
+
+  const paymentNavigation = () => {
+    navigation.navigate('MakePayment', {
+      stud:student
+    });
   };
 
   // Request Camera Permission
@@ -74,8 +80,8 @@ export default function App() {
       <Button title={'Fetch Student'} onPress={() => getStudent(text)} color='blue' />
       {student &&
       <>
-        <Text style={styles.maintext}>{student.student_name}</Text>
-        <Button title={'Fetch Student'} onPress={() => getStudent(text)} color='blue' />
+        <Text style={styles.maintext}>Student Name : {student.student_name}</Text>
+        <Button title={'Make Payment'} onPress={() => paymentNavigation()} color='green' />
       </>
       }
       </>
