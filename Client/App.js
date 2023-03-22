@@ -13,7 +13,7 @@ import MakePayment from './screens/it20182700/makePayment';
 
 import Start2 from './screens/it20183004/start';
 
-import Start3 from './screens/it20202286/start';
+import Start3 from './screens/it20202286/Homework/Screens/Intro';
 
 import Start4 from './screens/it20222154/start';
 
