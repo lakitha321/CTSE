@@ -89,7 +89,7 @@ const App = ({navigation}) => {
         <Text style={styles.subheadertext}>Pinindu</Text>
         </Pressable>
         <Text>    </Text>
-        <Pressable style={styles.button} onPress={()=>{navigation.navigate('Start3')}}>
+        <Pressable style={styles.button} onPress={()=>{navigation.navigate('AllPayments')}}>
         <View style={styles.headcontainer}>
           <Image
             style={styles.headLogo}
