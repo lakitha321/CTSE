@@ -13,10 +13,11 @@ import QRCode from './screens/it20182700/sample_qr_gen';
 import MakePayment from './screens/it20182700/makePayment';
 import AllPayments from './screens/it20182700/allPayments';
 import SubmitPayment from './screens/it20182700/paymentSubmit';
+
+import Start2 from './screens/it20183004/start';
 import AttendanceScanner from './screens/it20183004/scanner';
 import AllAttendances from './screens/it20183004/allAttendances';
-import Start2 from './screens/it20183004/start';
-
+import AttendanceDetails from './screens/it20183004/allAttendances';
 
 // import Start3 from './screens/it20202286/Homework/addHomework';
 
@@ -49,6 +50,7 @@ export default function App() {
         <Stack.Screen name="Start2" component={Start2} />
         <Stack.Screen name="AttendanceScanner" component={AttendanceScanner} />
         <Stack.Screen name="AllAttendances" component={AllAttendances} />
+        <Stack.Screen name="AttendanceDetails" component={AttendanceDetails} />
 
         {/* <Stack.Screen name="Start3" component={Start3} /> */}
 

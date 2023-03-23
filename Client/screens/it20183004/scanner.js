@@ -43,9 +43,9 @@ export default function App() {
         batch: 'tempbatch',
         class_: 'give val',
         name: student.student_name,
-        nic: student.nic
-      
+        nic: student.nic  
     }
+    
     await axios.post('https://ctse-node-server.herokuapp.com/attendance/upload', newAttendance)
     .then(response => {
       Alert.alert(response.data);

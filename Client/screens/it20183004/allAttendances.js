@@ -22,6 +22,8 @@ const StylishSelection = ({navigation}) => {
 
   const handlePress = (item) => {
     setSelectedItem(item);
+    navigation.navigate('AttendanceDetails',{
+        id : item._id})
   };
 
   const renderItem = ({ item }) => {
@@ -30,7 +32,8 @@ const StylishSelection = ({navigation}) => {
         style={[styles.item, selectedItem?._id === item._id && styles.selected]}
         onPress={() => handlePress(item)}
       >
-        <Text style={styles.itemText}>{item.year}</Text>
+        <Text style={styles.itemText}>{item.name}</Text>
+        <Text style={styles.itemText}>{item.nic}</Text>
       </TouchableOpacity>
     );
   };
