@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ScrollView } from 'react-native';
 // import DateTimePickerModal from "react-native-modal-datetime-picker";
 import axios from 'axios';
-import RoundIconBtn from './RoundIconBtn';
 
-const addHomework = () => {
-  const [homeworkTitle, setHomeworkTitle] = useState('');
-  const [homeworkDec, setHomeworkDec] = useState('');
-  
-//   const [registeredDate, setRegisteredDate] = useState('');
+const RegistrationForm = () => {
+  const [date, setDate] = useState('');
+  const [time, setTime] = useState('');
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [classDay, setClassDay] = useState('');
   const [batch, setBatch] = useState('A/L2023');
 
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
@@ -28,50 +28,64 @@ const addHomework = () => {
 
   const handleSubmit = async () => {
 
-    const newHomework = {
-        homework_title: homeworkTitle,
-        homework_dec: homeworkDec,
-       
+    const newStudent = {
+        student_name: date,
+        parent_name: time,
+        student_phone: title,
+        parent_phone: description,
+        classDay: classDay,
         batch: batch
     }
-
-    const closeModal = () => {
-        if (!isEdit) {
-          setTitle('');
-          setDesc('');
-        }
-        onClose();
-      };
-
-
-    await axios.post('https://ctse-node-server.herokuapp.com/homework/upload', newHomework)
+    await axios.post('https://ctse-node-server.herokuapp.com/students/upload', newStudent)
     .then(response => {
       Alert.alert(response.data);
     })
     .catch(error => {
-      Alert.alert('Homework creation Failed', ' Homework creation failed. Please try again.');
+      Alert.alert('Registration Failed', 'Student registration failed. Please try again.');
     });
   };
 
   return (
     <View style={styles.container}>
       <ScrollView>
-      <Text style={styles.label}>Title</Text>
+      <Text style={styles.label}>Student Name</Text>
       <TextInput
         style={styles.input}
-        value={homeworkTitle}
-        onChangeText={setHomeworkTitle}
+        value={date}
+        onChangeText={setDate}
       />
 
-      <Text style={styles.label}>Description</Text>
+      <Text style={styles.label}>Parent Name</Text>
       <TextInput
         style={styles.input}
-        value={homeworkDec}
-        onChangeText={setHomeworkDec}
+        value={time}
+        onChangeText={setTime}
+      />
+
+      <Text style={styles.label}>Student Phone</Text>
+      <TextInput
+        style={styles.input}
+        value={title}
+        onChangeText={setTitle}
+        keyboardType='phone-pad'
+      />
+
+      <Text style={styles.label}>Parent Phone</Text>
+      <TextInput
+        style={styles.input}
+        value={description}
+        onChangeText={setDescription}
+        keyboardType='phone-pad'
+      />
+
+      <Text style={styles.label}>classDay</Text>
+      <TextInput
+        style={styles.input}
+        value={classDay}
+        onChangeText={setClassDay}
       />
 
       
-    
       <Text style={styles.label}>Batch : {batch}</Text>
       <View
       style={{
@@ -91,20 +105,9 @@ const addHomework = () => {
       </View>
 
      
-      {/* <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+      <TouchableOpacity style={styles.button} onPress={handleSubmit}>
         <Text style={styles.buttonText}>Submit</Text>
-      </TouchableOpacity> */}
-
-      <View style={styles.btnContainer}>
-            <RoundIconBtn
-              size={15}
-              antIconName='check'
-              onPress={handleSubmit}
-            />
-          </View>
-
- 
-
+      </TouchableOpacity>
   </ScrollView>
 </View>
 );
@@ -152,14 +155,6 @@ color: '#fff',
 fontSize: 18,
 textAlign: 'center',
 },
-btnContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    paddingVertical: 15,
-  },
-
 });
 
-export default addHomework;
-
-
+export default RegistrationForm;

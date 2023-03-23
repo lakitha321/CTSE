@@ -18,14 +18,14 @@ const noticeSchema = new mongoose.Schema(
       type: String,
       required: true
     },
-    year: {
+    classDay: {
       type: String,
       required: true
     },
-    class: {
-      type: String,
-      required: true
-    }
+    batch:{
+      type:String,
+      required:true
+    },
   }
 );
 

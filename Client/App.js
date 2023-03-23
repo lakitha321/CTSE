@@ -21,6 +21,8 @@ import Start3 from './screens/it20202286/Homework/addHomework';
 
 import Start4 from './screens/it20222154/start';
 import Register from './screens/it20222154/registration';
+import Notices from './screens/it20202286/Notices/addNotice';
+import Homework from './screens/it20202286/Homework/addHomework'
 
 
 
@@ -52,6 +54,8 @@ export default function App() {
         <Stack.Screen name="Start4" component={Start4} />
         <Stack.Screen name="Register" component={Register} />
         <Stack.Screen name="AttendanceScanner" component={AttendanceScanner} />
+        <Stack.Screen name="Notice" component={Notices}/>
+        <Stack.Screen name="Homework"  component={Homework}/>
         
 
       </Stack.Navigator>
