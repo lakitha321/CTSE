@@ -13,11 +13,21 @@ const App = ({navigation}) => {
     <>
     <View>
       <Text style={styles.headertext}>KAVEESHA</Text>
-      <Pressable  onPress={()=>{navigation.navigate('AttendanceForm')}}>
+    
+      <Pressable  onPress={()=>{navigation.navigate('AttendanceScanner')}}>
+        
         <View >
         
         </View>
-        <Text >Attendance Form</Text>
+        <Text >Attendance Scanner</Text>
+      </Pressable>
+
+      <Pressable  onPress={()=>{navigation.navigate('QRCode')}}>
+        
+        <View >
+        
+        </View>
+        <Text >Student QR</Text>
       </Pressable>
     </View>
     </>

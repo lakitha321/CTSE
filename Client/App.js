@@ -13,9 +13,9 @@ import QRCode from './screens/it20182700/sample_qr_gen';
 import MakePayment from './screens/it20182700/makePayment';
 import AllPayments from './screens/it20182700/allPayments';
 import SubmitPayment from './screens/it20182700/paymentSubmit';
-
+import AttendanceScanner from './screens/it20183004/scanner';
 import Start2 from './screens/it20183004/start';
-import AttendanceForm from './screens/it20183004/AttendanceForm';
+
 
 import Start3 from './screens/it20202286/start';
 
@@ -51,7 +51,8 @@ export default function App() {
 
         <Stack.Screen name="Start4" component={Start4} />
         <Stack.Screen name="Register" component={Register} />
-        <Stack.Screen name="AttendanceForm" component={AttendanceForm} />
+        <Stack.Screen name="AttendanceScanner" component={AttendanceScanner} />
+        
 
       </Stack.Navigator>
  

@@ -6,8 +6,16 @@ const router = express.Router();
 router.post(
     '/upload',
     async (req, res) => {
+
+      //getting current date and time
+      var today = new Date();
+      var year = today.getFullYear();
+      var month = today.getMonth()+1;
+      var day = today.getDate();
+      var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+
       try {
-        const { sid, batch, class_, year, month, day, time} = req.body;
+        const { sid, batch, class_} = req.body;
         const newAttendance = new Attendance({
           sid,
           batch,
