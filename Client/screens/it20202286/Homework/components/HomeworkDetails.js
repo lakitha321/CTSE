@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { ScrollView, StyleSheet, Text, View, Alert } from 'react-native';
-import { useHeaderHeight } from '@react-navigation/stack';
+
 import colors from '../misc/colors';
 import RoundIconBtn from './RoundIconBtn';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useNotes } from '../contexts/NoteProvider';
+import { useNotes } from '../contexts/WorkProvider';
 import HomeworkInputModal from './HomeworkInputModal';
 
 const formatDate = ms => {
@@ -21,7 +21,7 @@ const formatDate = ms => {
 
 const HomeworkDetails = props => {
   const [note, setNote] = useState(props.route.params.note);
-  const headerHeight = useHeaderHeight();
+
   const { setNotes } = useNotes();
   const [showModal, setShowModal] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
@@ -87,7 +87,7 @@ const HomeworkDetails = props => {
   return (
     <>
       <ScrollView
-        contentContainerStyle={[styles.container, { paddingTop: headerHeight }]}
+        
       >
         <Text style={styles.time}>
           {note.isUpdated

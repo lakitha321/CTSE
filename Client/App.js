@@ -1,5 +1,6 @@
 import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -17,11 +18,41 @@ import Start3 from './screens/it20202286/Homework/Screens/Intro';
 
 import Start4 from './screens/it20222154/start';
 
+import NoteDetail from './screens/it20202286/Homework/components/HomeworkDetails';
+
+import NoteScreen from './screens/it20202286/Homework/Screens/HomeworkPage';
+
+import NoteProvider from './screens/it20202286/Homework/contexts/WorkProvider';
+
+// import Animations from './screens/it20202286/Homework/components/Animations';
+
+
 const Stack = createStackNavigator();
 
 export default function App() {
+
+  const [user, setUser] = useState({});
+  const [isAppFirstTimeOpen, setIsAppFirstTimeOpen] = useState(false);
+  const findUser = async () => {
+    const result = await AsyncStorage.getItem('user');
+
+    if (result === null) return setIsAppFirstTimeOpen(true);
+
+    setUser(JSON.parse(result));
+    setIsAppFirstTimeOpen(false);
+  };
+
+  useEffect(() => {
+    findUser();
+  }, []);
+  
+
+  const renderNoteScreen = props => <NoteScreen {...props} user={user} />;
+
+
   return (
     <NavigationContainer>
+    <NoteProvider>
       <Stack.Navigator>
         <Stack.Screen
           name="Home"
@@ -40,7 +71,18 @@ export default function App() {
 
         <Stack.Screen name="Start4" component={Start4} />
 
+        {/* <Stack.Screen  name="Animations" component={Animations}/> */}
+
+       
+      
+            <Stack.Screen name="NoteDetail" component={NoteDetail}/>
+
+            <Stack.Screen name="NoteScreen" component={renderNoteScreen}/>
+
+  
+
       </Stack.Navigator>
+      </NoteProvider>
     </NavigationContainer>
   );
 }
