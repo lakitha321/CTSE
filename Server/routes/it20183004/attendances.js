@@ -48,6 +48,15 @@ router.post(
       res.json('Error while getting list of Attendances. Try again later.');
     }
   });
+
+  router.get('/get/:id', async (req, res) => {
+    try {
+      const Attend = await Attendance.findById(req.params.id);
+      res.send(Attend);
+    } catch (error) {
+      res.json('Error while getting list of Attendances. Try again later.');
+    }
+  });
   
   router.route('/delete/:id').delete(async (req, res) => {
   
