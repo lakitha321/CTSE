@@ -13,11 +13,12 @@ app.use(bodyParser.json());
 //sending an email to the customer
 app.post('/sendmail', async (req, res) => {
 
-    const email = req.body.email;
-    const price = Number(req.body.price);
-    const cprice = price/100;
-    const items = req.body.items;
-    const id = req.body.id;
+    const p_email = req.body.p_email;
+    const s_email = req.body.s_email;
+    const price = req.body.price;
+    const month = req.body.month;
+    const year = req.body.year;
+    const name = req.body.name;
 
     var transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -27,25 +28,40 @@ app.post('/sendmail', async (req, res) => {
     }
     });
 
-    var mailOptions = {
+    var mailOption1 = {
     from: 'successeducation752@gmail.com',
-    to: `${email}`,
+    to: `${p_email}`,
     subject: 'Sending an email',
-    html: `<div align='center'><h1>Your Order Recieved</h1>
+    html: `<div align='center'><h1>Your Payment Received for ${month}/${year}</h1>
     <p>Thank you!</p>
-    <p>Your order ID : ${id}</p>
-    <h3>Orderd Items : ${items}</h3>
-    <h3>Total Price : ${cprice}</h3>
-    <h3>Is Paid ? : Yes</h3>
+    <h3>Student Name : ${name}</h3>
+    <h3>Amount : Rs.${price}</h3>
     </div>`
-
     };
 
-    transporter.sendMail(mailOptions, function(error, info){
+    var mailOption2 = {
+    from: 'successeducation752@gmail.com',
+    to: `${s_email}`,
+    subject: 'Sending an email',
+    html: `<div align='center'><h1>Your Payment Received for ${month}/${year}</h1>
+    <p>Thank you!</p>
+    <h3>Student Name : ${name}</h3>
+    <h3>Amount : Rs.${price}</h3>
+    </div>`
+    };
+
+    transporter.sendMail(mailOption1, function(error, info){
     if (error) {
         console.log(error);
     } else {
-        console.log('Email sent: ' + info.response);
+        transporter.sendMail(mailOption2, function(error, info){
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Email sent');
+            res.send('Email sent');
+        }
+        });
     }
     });
 
