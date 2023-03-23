@@ -29,6 +29,14 @@ const App = ({navigation}) => {
         </View>
         <Text >Student QR</Text>
       </Pressable>
+
+      <Pressable  onPress={()=>{navigation.navigate('AllAttendances')}}>
+        
+        <View >
+        
+        </View>
+        <Text >All Attendances</Text>
+      </Pressable>
     </View>
     </>
   )

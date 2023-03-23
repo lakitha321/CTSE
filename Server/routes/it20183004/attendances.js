@@ -15,7 +15,7 @@ router.post(
       var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 
       try {
-        const { sid, batch, class_} = req.body;
+        const { sid, batch, class_, name, nic} = req.body;
         const newAttendance = new Attendance({
           sid,
           batch,
@@ -24,6 +24,8 @@ router.post(
           month,
           day,
           time,
+          name,
+          nic
         });
         await newAttendance.save();
         res.json('Saved');
@@ -42,6 +44,15 @@ router.post(
     try {
       const Attendances = await Attendance.find({});
       res.send(Attendances);
+    } catch (error) {
+      res.json('Error while getting list of Attendances. Try again later.');
+    }
+  });
+
+  router.get('/get/:id', async (req, res) => {
+    try {
+      const Attend = await Attendance.findById(req.params.id);
+      res.send(Attend);
     } catch (error) {
       res.json('Error while getting list of Attendances. Try again later.');
     }
