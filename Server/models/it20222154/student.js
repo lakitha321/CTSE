@@ -33,7 +33,16 @@ const studentSchema = new mongoose.Schema(
     password: {
         type: String,
         required: true
+    },
+    registered_date:{
+      type:String,
+      required: true
+    },
+    batch:{
+      type:String,
+      required:true
     }
+   
   }
 );
 

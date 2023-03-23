@@ -3,34 +3,17 @@ const express = require('express');
 const Student = require('../../models/it20222154/student');
 const router = express.Router();
 
-router.route("/add").post(async (req,res)=>{
 
-    const { student_name, parent_name, student_phone, parent_phone, nic, student_email, parent_email, password } = req.body;
-
-    const newStudent = new Student({
-        student_name,
-        parent_name,
-        student_phone,
-        parent_phone,
-        nic,
-        student_email,
-        parent_email,
-        newStudent
-    });
-
-    await newStudent.save().then(()=>{
-        res.json("Student Added!");
-    }).catch((err)=>{
-        res.json(err)
-    })
-
-})
 
 router.post(
     '/upload',
     async (req, res) => {
+
+    var today = new Date();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+
       try {
-        const { student_name, parent_name, student_phone, parent_phone, nic, student_email, parent_email, password } = req.body;
+        const { student_name, parent_name, student_phone, parent_phone, nic, student_email, parent_email, password ,batch} = req.body;
         const newStudent = new Student({
           student_name,
           parent_name,
@@ -39,7 +22,9 @@ router.post(
           nic,
           student_email,
           parent_email,
-          password
+          password,
+          registered_date:date,
+          batch
         });
         await newStudent.save();
         res.json('Saved');
@@ -106,11 +91,14 @@ router.post(
   });
   
   router.route('/edit/:id').put(async (req, res) => {
+
+    var today = new Date();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
   
     let id = req.params.id;
-    const { student_name, parent_name, student_phone, parent_phone, nic, student_email, parent_email } = req.body;
+    const { student_name, parent_name, student_phone, parent_phone, nic, student_email, parent_email,batch} = req.body;
 
-    const update = await Student.findByIdAndUpdate(id, {student_name:student_name, parent_name:parent_name, student_phone:student_phone, parent_phone:parent_phone, nic:nic, student_email:student_email, parent_email:parent_email}).then(()=>{
+    const update = await Student.findByIdAndUpdate(id, {student_name:student_name, parent_name:parent_name, student_phone:student_phone, parent_phone:parent_phone, nic:nic, student_email:student_email, parent_email:parent_email, batch:batch, registered_date:date}).then(()=>{
         res.json("Updated");
     }).catch((err)=>{
         res.json("Error");

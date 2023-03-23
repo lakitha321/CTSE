@@ -6,8 +6,13 @@ const router = express.Router();
 router.post(
     '/upload',
     async (req, res) => {
+
+      var today = new Date();
+      var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+      var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+
       try {
-        const { date, time, price, status, sid, month, year} = req.body;
+        const {price, status, sid, month, year} = req.body;
         const newPayment = new Payment({
           date,
           time,
@@ -52,7 +57,31 @@ router.post(
         (a, b) => b.createdAt - a.createdAt
       );
       res.send(sortedByCreationDate);
-      console.log(Stud.student_name);
+    } catch (error) {
+      res.json('Error while getting list of Students. Try again later.');
+    }
+  });
+
+  router.get('/get/:sid/:y/:m', async (req, res) => {
+    try {
+      const Paym = await Payment.findOne({
+        sid:req.params.sid,
+        year:req.params.y,
+        month:req.params.m
+      });
+      if(Paym){
+        res.send(Paym);
+      }
+      else
+      {
+        res.send({
+          date:'undifined',
+          time:'undifined',
+          price:'undifined',
+          status:'undifined'
+        });
+      }
+      
     } catch (error) {
       res.json('Error while getting list of Students. Try again later.');
     }
@@ -77,7 +106,7 @@ router.post(
   router.route('/edit/:id').put(async (req, res) => {
   
     let id = req.params.id;
-    const { date, time, price, status, sid, month, year} = req.body;
+    const {price, status, sid, month, year} = req.body;
 
     const update = await Payment.findByIdAndUpdate(id, {date:date, time:time, price:price, status:status, sid:sid, month:month, year:year}).then(()=>{
         res.json("Updated");

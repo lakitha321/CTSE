@@ -11,12 +11,16 @@ import Start1 from './screens/it20182700/start';
 import Scanner from './screens/it20182700/scanner';
 import QRCode from './screens/it20182700/sample_qr_gen';
 import MakePayment from './screens/it20182700/makePayment';
+import AllPayments from './screens/it20182700/allPayments';
+import SubmitPayment from './screens/it20182700/paymentSubmit';
 
 import Start2 from './screens/it20183004/start';
+import AttendanceForm from './screens/it20183004/AttendanceForm';
 
 import Start3 from './screens/it20202286/Homework/Screens/Intro';
 
 import Start4 from './screens/it20222154/start';
+import Register from './screens/it20222154/registration';
 
 import NoteDetail from './screens/it20202286/Homework/components/HomeworkDetails';
 
@@ -64,12 +68,16 @@ export default function App() {
         <Stack.Screen name="Scanner" component={Scanner} />
         <Stack.Screen name="QRCode" component={QRCode} />
         <Stack.Screen name="MakePayment" component={MakePayment} />
+        <Stack.Screen name="AllPayments" component={AllPayments} />
+        <Stack.Screen name="SubmitPayment" component={SubmitPayment} />
 
         <Stack.Screen name="Start2" component={Start2} />
 
         <Stack.Screen name="Start3" component={Start3} />
 
         <Stack.Screen name="Start4" component={Start4} />
+        <Stack.Screen name="Register" component={Register} />
+        <Stack.Screen name="AttendanceForm" component={AttendanceForm} />
 
         {/* <Stack.Screen  name="Animations" component={Animations}/> */}
 
