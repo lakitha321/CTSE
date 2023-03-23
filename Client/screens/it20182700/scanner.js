@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Button } from 'react-native';
+import { Text, View, StyleSheet, Button, ActivityIndicator } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import axios from 'axios';
 
@@ -76,12 +76,21 @@ export default function App({navigation}) {
       {scanned && 
       <>
       <Button title={'Tap to Scan'} onPress={() => setScanned(false)} color='blue' />
-      <Text style={styles.maintext}></Text>
+      <Text></Text>
       <Button title={'Fetch Student'} onPress={() => getStudent(text)} color='blue' />
       {student &&
       <>
+        {student.student_name &&
+        <>
         <Text style={styles.maintext}>Student Name : {student.student_name}</Text>
         <Button title={'Make Payment'} onPress={() => paymentNavigation()} color='green' />
+        </>
+        }
+      </>
+      }
+      {!student &&
+      <>
+      <ActivityIndicator size="large" />
       </>
       }
       </>
