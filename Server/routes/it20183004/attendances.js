@@ -15,7 +15,7 @@ router.post(
       var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 
       try {
-        const { sid, batch, class_} = req.body;
+        const { sid, batch, class_, name, nic} = req.body;
         const newAttendance = new Attendance({
           sid,
           batch,
@@ -24,6 +24,8 @@ router.post(
           month,
           day,
           time,
+          name,
+          nic
         });
         await newAttendance.save();
         res.json('Saved');

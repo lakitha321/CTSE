@@ -29,6 +29,14 @@ const attendanceSchema = new mongoose.Schema(
     time: {
       type: String,
       required: true
+    },
+    name: {
+      type: String,
+      required: true
+    },
+    nic: {
+      type: String,
+      required: true
     }
   }
 );
