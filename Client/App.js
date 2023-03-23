@@ -17,7 +17,7 @@ import AttendanceScanner from './screens/it20183004/scanner';
 import Start2 from './screens/it20183004/start';
 
 
-import Start3 from './screens/it20202286/start';
+import Start3 from './screens/it20202286/Homework/addHomework';
 
 import Start4 from './screens/it20222154/start';
 import Register from './screens/it20222154/registration';
