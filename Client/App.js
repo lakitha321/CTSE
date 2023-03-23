@@ -17,7 +17,7 @@ import SubmitPayment from './screens/it20182700/paymentSubmit';
 import Start2 from './screens/it20183004/start';
 import AttendanceScanner from './screens/it20183004/scanner';
 import AllAttendances from './screens/it20183004/allAttendances';
-import AttendanceDetails from './screens/it20183004/allAttendances';
+import AttendanceDetails from './screens/it20183004/attendanceDetails';
 
 // import Start3 from './screens/it20202286/Homework/addHomework';
 
