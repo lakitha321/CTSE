@@ -2,16 +2,23 @@ import React from "react";
 import {
   StyleSheet,
   View,
-  Text
+  Text,
+  Pressable
 } from "react-native";
 
 
-const App = () => {
+const App = ({navigation}) => {
 
   return(
     <>
     <View>
       <Text style={styles.headertext}>KAVEESHA</Text>
+      <Pressable  onPress={()=>{navigation.navigate('AttendanceForm')}}>
+        <View >
+        
+        </View>
+        <Text >Attendance Form</Text>
+      </Pressable>
     </View>
     </>
   )

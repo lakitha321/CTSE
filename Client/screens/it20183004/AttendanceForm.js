@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, Button, ScrollView } from 'react-native';
+import { View, Text, TextInput, StyleSheet,TouchableOpacity,Button, Alert, ScrollView } from 'react-native';
+import axios from 'axios';
 
-const StudentForm = () => {
+const AttendanceForm = () => {
   const [studentId, setStudentId] = useState('');
   const [batch, setBatch] = useState('');
   const [section, setSection] = useState('');
@@ -10,13 +11,32 @@ const StudentForm = () => {
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
 
-  const handleSubmit = () => {
-    // handle form submission here
+  const handleSubmit = async () => {
+    
+    const newAttendance = {
+      sid: studentId,
+      batch: batch,
+      class: section,
+      year: year,
+      month: month,
+      day: date,
+      time: time,
+  }
+  console.log('before');
+  await axios.post('https://ctse-node-server.herokuapp.com/attendance/upload', newAttendance)
+  .then(response => {
+    Alert.alert(response.data);
+    console.log('after');
+    
+  })
+  .catch(error => {
+    Alert.alert('Attendance Marking Failed', 'Attendance Marking Failed.Please try again.');
+  });
   };
 
   return (
-    <ScrollView>
     <View style={styles.container}>
+       <ScrollView>
       <Text style={styles.label}>Student ID:</Text>
       <TextInput
         style={styles.input}
@@ -59,9 +79,11 @@ const StudentForm = () => {
         value={time}
         onChangeText={setTime}
       />
-      <Button title="Submit" onPress={handleSubmit} />
+      <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+        <Text style={styles.buttonText}>Submit</Text>
+      </TouchableOpacity>
+      </ScrollView>
     </View>
-    </ScrollView>
   );
 };
 
@@ -82,6 +104,18 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     fontSize: 16,
   },
+  button: {
+    backgroundColor: '#008080',
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 20,
+  },
+
+  buttonText: {
+    color: '#fff',
+    fontSize: 18,
+    textAlign: 'center',
+  },
 });
 
-export default StudentForm;
+export default AttendanceForm;

@@ -19,7 +19,7 @@ const App = ({navigation}) => {
         <Text style={styles.text}></Text>
         <ScrollView>
         <Text>    </Text>
-        <Pressable style={styles.button} onPress={()=>{navigation.navigate('QRCode')}}>
+        <Pressable style={styles.button} onPress={()=>{navigation.navigate('Start2')}}>
         <View style={styles.headcontainer}>
           <Image
             style={styles.headLogo}
