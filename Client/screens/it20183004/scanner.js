@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Button } from 'react-native';
+import { Text, View, StyleSheet, Button, ScrollView, Alert} from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import {useRoute} from '@react-navigation/native';
 import axios from 'axios';
 
 export default function App() {
-
+  const route = useRoute();
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [text, setText] = useState('Not yet scanned')
@@ -29,6 +30,29 @@ export default function App() {
       alert(error.message);
     }
   };
+  //confirming attendance
+  const confirmAttendance = async () => {
+
+    var tempbatch = student.batch;
+    if (!student.batch) {
+      tempbatch = 'batch';
+    }
+
+    const newAttendance = {
+        sid: student._id,
+        batch: tempbatch,
+        class: 'give val',
+      
+    }
+    await axios.post('https://ctse-node-server.herokuapp.com/attendance/upload', newAttendance)
+    .then(response => {
+      Alert.alert(response.data);
+      navigation.goBack()
+    })
+    .catch(error => {
+      Alert.alert(error);
+    });
+  }; 
 
   // Request Camera Permission
   useEffect(() => {
@@ -60,6 +84,7 @@ export default function App() {
   // Return the View
   return (
     <View style={styles.container}>
+      <ScrollView>
       <View style={styles.barcodebox}>
         <BarCodeScanner
           onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
@@ -71,15 +96,24 @@ export default function App() {
       <>
       <Button title={'Tap to Scan'} onPress={() => setScanned(false)} color='blue' />
       <Text style={styles.maintext}></Text>
-      <Button title={'Fetch Student'} onPress={() => getStudent(text)} color='blue' />
+      <Button title={'Mark Attendance'} onPress={() => getStudent(text)} color='blue' />
       {student &&
       <>
         <Text style={styles.maintext}>{student.student_name}</Text>
-        <Button title={'Fetch Student'} onPress={() => getStudent(text)} color='blue' />
+        <Text style={styles.maintext}>{student.nic}</Text>
+        <Text style={styles.maintext}>{student.batch}</Text>
+        
       </>
       }
+      <View>
+      <Text></Text> 
+      <Button title={'Confirm Attendance'}
+      onPress={() => confirmAttendance()}
+      color='green'/>
+      </View>
       </>
       }
+      </ScrollView>
     </View>
   );
 }
@@ -103,5 +137,5 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     borderRadius: 30,
     backgroundColor: 'blue'
-  }
+  },
 });
