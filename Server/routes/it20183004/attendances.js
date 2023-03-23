@@ -19,7 +19,7 @@ router.post(
         const newAttendance = new Attendance({
           sid,
           batch,
-          class_,
+          class:class_,
           year,
           month,
           day,
@@ -28,7 +28,7 @@ router.post(
         await newAttendance.save();
         res.json('Saved');
       } catch (error) {
-        res.json('Error');
+        res.json(error);
       }
     },
     (error, req, res, next) => {
