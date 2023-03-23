@@ -160,15 +160,17 @@ const App = ({navigation}) => {
         setdec();
     };
 
+    const route = useRoute();
+
     const makePayment = (m) => {
         navigation.navigate('SubmitPayment',{
             sid:id,
             month:m,
-            year:year
+            year:year,
+            student:route.params.stud
         });
     };
 
-    const route = useRoute();
     return (
         <View style={styles.container}>
         <View style={styles.box1}>

@@ -37,7 +37,32 @@ const StylishSelection = ({navigation}) => {
     }
     await axios.post('https://ctse-node-server.herokuapp.com/payments/upload', newPayment)
     .then(response => {
-      Alert.alert(response.data);
+      if(response.data === 'Saved'){
+        Alert.alert('Pyment successful!');
+        sendMail();
+      }
+    })
+    .catch(error => {
+      Alert.alert(error);
+    });
+  };
+
+  const sendMail = async () => {
+    const newMail = {
+      // p_email: route.params.student.parent_email,
+      // s_email: route.params.student.student_email,
+      p_email: 'lkthmtchl@gmail.com',
+      s_email: 'lkthmtchl@gmail.com',
+      price: '1500',
+      month: route.params.month,
+      year: route.params.year,
+      name: route.params.student.student_name
+    }
+    await axios.post('http://ctse-node-server.herokuapp.com/sendmail', newMail)
+    .then(response => {
+      if(response.data === 'Email sent'){
+        Alert.alert('Mail Sent!');
+      }
       navigation.goBack()
     })
     .catch(error => {
