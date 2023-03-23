@@ -33,21 +33,20 @@ export default function App() {
   //confirming attendance
   const confirmAttendance = async () => {
 
-    var tempbatch = student.batch;
-    if (!student.batch) {
-      tempbatch = 'batch';
-    }
+    // var tempbatch = student.batch;
+    // if (!student.batch) {
+    //   tempbatch = 'batch';
+    // }
 
     const newAttendance = {
         sid: student._id,
-        batch: tempbatch,
-        class: 'give val',
+        batch: 'tempbatch',
+        class_: 'give val',
       
     }
     await axios.post('https://ctse-node-server.herokuapp.com/attendance/upload', newAttendance)
     .then(response => {
       Alert.alert(response.data);
-      navigation.goBack()
     })
     .catch(error => {
       Alert.alert(error);
@@ -95,22 +94,20 @@ export default function App() {
       {scanned && 
       <>
       <Button title={'Tap to Scan'} onPress={() => setScanned(false)} color='blue' />
-      <Text style={styles.maintext}></Text>
+      <Text></Text>
       <Button title={'Mark Attendance'} onPress={() => getStudent(text)} color='blue' />
       {student &&
       <>
         <Text style={styles.maintext}>{student.student_name}</Text>
         <Text style={styles.maintext}>{student.nic}</Text>
         <Text style={styles.maintext}>{student.batch}</Text>
-        
+        <View>
+        <Button title={'Confirm Attendance'}
+        onPress={() => confirmAttendance()}
+        color='green'/>
+        </View>
       </>
       }
-      <View>
-      <Text></Text> 
-      <Button title={'Confirm Attendance'}
-      onPress={() => confirmAttendance()}
-      color='green'/>
-      </View>
       </>
       }
       </ScrollView>
@@ -127,7 +124,7 @@ const styles = StyleSheet.create({
   },
   maintext: {
     fontSize: 16,
-    margin: 20,
+    margin: 5,
   },
   barcodebox: {
     alignItems: 'center',
