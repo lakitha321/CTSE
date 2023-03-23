@@ -23,7 +23,8 @@ const StylishSelection = ({navigation}) => {
   const handlePress = (item) => {
     setSelectedItem(item);
     navigation.navigate('AttendanceDetails',{
-        id : item._id})
+      sitem:item
+    });
   };
 
   const renderItem = ({ item }) => {
