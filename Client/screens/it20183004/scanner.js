@@ -102,11 +102,9 @@ export default function App() {
         <Text style={styles.maintext}>{student.student_name}</Text>
         <Text style={styles.maintext}>{student.nic}</Text>
         <Text style={styles.maintext}>{student.batch}</Text>
-        <View>
-        <Button title={'Confirm Attendance'}
-        onPress={() => confirmAttendance()}
-        color='green'/>
-        </View>
+        <TouchableOpacity style={styles.button} onPress={() => confirmAttendance()}>
+        <Text style={styles.buttonText}>Confirm Attendance</Text>
+        </TouchableOpacity>
       </>
       }
       </>
@@ -135,5 +133,18 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     borderRadius: 30,
     backgroundColor: 'blue'
+  },
+  button: {
+    backgroundColor: 'green',
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 0,
+    alignSelf: 'center'
+  },
+
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
+    textAlign: 'center',
   },
 });
