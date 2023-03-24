@@ -13,7 +13,7 @@ const RegistrationForm = () => {
   const [parentEmail, setParentEmail] = useState('');
   const [password, setPassword] = useState('');
   const [registeredDate, setRegisteredDate] = useState('');
-  const [batch, setBatch] = useState('A/L2023');
+  const [batch, setBatch] = useState('AL2023');
 
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
@@ -122,13 +122,13 @@ const RegistrationForm = () => {
           height: 80,
           padding: 20,
       }}>
-      <TouchableOpacity style={styles.button2} onPress={() => setBatch('A/L2023')}>
+      <TouchableOpacity style={styles.button2} onPress={() => setBatch('AL2023')}>
       <Text style={styles.button2Text}>A/L2023</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button2} onPress={() => setBatch('A/L2024')}>
+      <TouchableOpacity style={styles.button2} onPress={() => setBatch('AL2024')}>
       <Text style={styles.button2Text}>A/L2024</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button2} onPress={() => setBatch('A/L2025')}>
+      <TouchableOpacity style={styles.button2} onPress={() => setBatch('AL2025')}>
       <Text style={styles.button2Text}>A/L2025</Text>
       </TouchableOpacity>
       </View>

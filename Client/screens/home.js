@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState,useEffect } from 'react';
+import axios from 'axios';
 import { View, ScrollView, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
 
 const CARD_WIDTH = 100;
@@ -12,15 +13,15 @@ const cards = [
   { id: 5, image: require('../assets/payment.png'), title: 'Payments'},
 ];
 
-const notices = [
-  { _id: 1, title: 'notice 1'},
-  { _id: 2, title: 'notice 2'},
-  { _id: 3, title: 'notice 3'},
-  { _id: 4, title: 'notice 4'},
-  { _id: 5, title: 'notice 5'},
-];
-
 const HorizontalScrollCards = ({navigation}) => {
+
+  // const notices = [
+  //   { _id: 1, title: 'notice 1'},
+  //   { _id: 2, title: 'notice 2'},
+  //   { _id: 3, title: 'notice 3'},
+  //   { _id: 4, title: 'notice 4'},
+  //   { _id: 5, title: 'notice 5'},
+  // ];
 
     const handlePress = (id) => {
         if(id == 1)
@@ -34,6 +35,20 @@ const HorizontalScrollCards = ({navigation}) => {
         else if(id == 5)
         navigation.navigate('Scanner')
     };
+
+  const [notices, setData] = useState();
+
+  useEffect(() => {
+    function getData(){
+        axios.get(`https://ctse-node-server.herokuapp.com/notices/getByYear/AL2023`).then((res) => {
+            setData(res.data);
+        }).catch((err) => {
+            alert(err);
+        })
+    }
+    getData();
+  }, []);
+
 
   return (
     <>
@@ -53,15 +68,20 @@ const HorizontalScrollCards = ({navigation}) => {
     <View style={styles.container2}>
     <Text style={styles.title2}>Notices</Text>
       <ScrollView>
-      <View style={{ width: 10 }} />
-        {notices.map(card => (
-        <TouchableOpacity key={card._id}>
-          <View key={card._id} style={styles.card2}>
-            <Text style={styles.title}>{card.title}</Text>
-          </View>
-        </TouchableOpacity>
-        ))}
-        <Text></Text>
+        {notices &&
+        <>
+        <View style={{ width: 10 }} />
+          {notices.map(card => (
+          <TouchableOpacity key={card._id}>
+            <View key={card._id} style={styles.card2}>
+              <Text style={styles.title}>{card.title}</Text>
+              <Text style={styles.desc}>{card.description}</Text>
+            </View>
+          </TouchableOpacity>
+          ))}
+          <Text></Text>
+        </>
+        }
       </ScrollView>
     </View>
     </>
@@ -120,6 +140,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     // fontWeight: 'bold',
     fontSize: 16,
+    marginTop: 2,
+  },
+  desc: {
+    textAlign: 'center',
+    // fontWeight: 'bold',
+    fontSize: 12,
     marginTop: 2,
   },
   title2: {
