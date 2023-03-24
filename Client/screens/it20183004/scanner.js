@@ -41,11 +41,10 @@ export default function App() {
     const newAttendance = {
         sid: student._id,
         batch: 'tempbatch',
-        class_: 'give val',
+        class_: 'Grade 12',
         name: student.student_name,
         nic: student.nic  
     }
-    
     await axios.post('https://ctse-node-server.herokuapp.com/attendance/upload', newAttendance)
     .then(response => {
       Alert.alert(response.data);
