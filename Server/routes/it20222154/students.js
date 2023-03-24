@@ -96,14 +96,11 @@ router.post(
   });
   
   router.route('/edit/:id').put(async (req, res) => {
-
-    var today = new Date();
-    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
   
     let id = req.params.id;
-    const { student_name, parent_name, student_phone, parent_phone, nic, student_email, parent_email,batch} = req.body;
+    const { student_name, student_phone, nic, student_email } = req.body;
 
-    const update = await Student.findByIdAndUpdate(id, {student_name:student_name, parent_name:parent_name, student_phone:student_phone, parent_phone:parent_phone, nic:nic, student_email:student_email, parent_email:parent_email, batch:batch, registered_date:date}).then(()=>{
+    const update = await Student.findByIdAndUpdate(id, {student_name:student_name, student_phone:student_phone, nic:nic, student_email:student_email}).then(()=>{
         res.json("Updated");
     }).catch((err)=>{
         res.json("Error");

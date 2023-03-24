@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import axios from 'axios';
 
-export default App = ({navigation}) => {
+const App = ({navigation}) => {
 
   const adminMail = 'admin@gmail.com';
   const adminPass = 'admin';
@@ -91,3 +91,4 @@ const styles = StyleSheet.create({
   }
 });
 
+export default App;

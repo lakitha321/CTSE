@@ -1,4 +1,5 @@
 import React, { useState,useEffect } from 'react';
+import axios from 'axios';
 import {
   StyleSheet,
   View,
@@ -6,76 +7,115 @@ import {
   Button,
   TouchableOpacity,
   ScrollView,
-  TextInput
+  TextInput,
+  Alert
 } from "react-native";
 import {useRoute} from '@react-navigation/native';
 
 
-const App = ({}) => {
+const App = ({navigation}) => {
   const route = useRoute();
+
+  const [name, setname] = useState(route.params.logged.student_name);
+  const [nic, setnic] = useState(route.params.logged.nic);
+  const [phone, setphone] = useState(route.params.logged.student_phone);
+  const [email, setemail] = useState(route.params.logged.student_email);
+
+  const [student, setstudent] = useState();
+
+  const handleSubmit = async () => {
+
+    const editStudent = {
+        student_name: name,
+        student_phone: phone,
+        nic: nic,
+        student_email: email
+    }
+    await axios.put(`https://ctse-node-server.herokuapp.com/students/edit/${route.params.logged._id}`, editStudent)
+    .then(response => {
+        navigation.goBack();
+      Alert.alert(response.data);
+    })
+    .catch(error => {
+      Alert.alert('Registration Failed', 'Student registration failed. Please try again.');
+    });
+  };
+
+    useEffect(() => {
+        async function getStu(){
+            await axios.get(`https://ctse-node-server.herokuapp.com/students/get/${route.params.logged._id}`).then((res) => {
+                setstudent(res.data);
+            }).catch((err) => {
+                alert(err);
+            })
+        }
+        getStu();
+    }, []);
 
   return(
     <>
     <ScrollView>
     <View style={styles.container}>
     <Text style={styles.toptext1}>Student Details</Text>
+    { student &&
     <View style={styles.content}>
         <View style={styles.row}>
         <Text style={styles.label}>Name</Text>
         <TextInput
             style={styles.input}
-            defaultValue={route.params.logged.student_name}
-            // onChangeText={onChangeText}
+            defaultValue={student.student_name}
+            onChangeText={setname}
         />
         </View>
         <View style={styles.row}>
         <Text style={styles.label}>NIC</Text>
         <TextInput
             style={styles.input}
-            defaultValue={route.params.logged.nic}
-            // onChangeText={onChangeText}
+            defaultValue={student.nic}
+            onChangeText={setnic}
         />
         </View>
         <View style={styles.row}>
         <Text style={styles.label}>Phone</Text>
         <TextInput
             style={styles.input}
-            defaultValue={route.params.logged.student_phone}
-            // onChangeText={onChangeText}
+            defaultValue={student.student_phone}
+            onChangeText={setphone}
         />
         </View>
         <View style={styles.row}>
         <Text style={styles.label}>Email</Text>
         <TextInput
             style={styles.input}
-            defaultValue={route.params.logged.student_email}
-            // onChangeText={onChangeText}
+            defaultValue={student.student_email}
+            onChangeText={setemail}
         />
         </View>
         <View style={styles.row}>
         <Text style={styles.label}>Batch</Text>
-        <Text style={styles.value}>{route.params.logged.batch}</Text>
+        <Text style={styles.value}>{student.batch}</Text>
         </View>
         <View style={styles.row}>
         <Text style={styles.label}>Registered Date</Text>
-        <Text style={styles.value}>{route.params.logged.registered_date}</Text>
+        <Text style={styles.value}>{student.registered_date}</Text>
         </View>
         <View style={styles.row}>
         <Text style={styles.label}>Parent Name</Text>
-        <Text style={styles.value}>{route.params.logged.parent_name}</Text>
+        <Text style={styles.value}>{student.parent_name}</Text>
         </View>
         <View style={styles.row}>
         <Text style={styles.label}>Parent Email</Text>
-        <Text style={styles.value}>{route.params.logged.parent_email}</Text>
+        <Text style={styles.value}>{student.parent_email}</Text>
         </View>
         <View style={styles.row}>
         <Text style={styles.label}>Parent Phone</Text>
-        <Text style={styles.value}>{route.params.logged.parent_phone}</Text>
+        <Text style={styles.value}>{student.parent_phone}</Text>
         </View>
-        <TouchableOpacity style={styles.button} onPress={() => handleDelete(item._id)}>
+        <TouchableOpacity style={styles.button} onPress={() => handleSubmit()}>
         <Text style={styles.buttonText}>Update Details</Text>
         </TouchableOpacity>
     </View>
+    }
     </View>
     </ScrollView>
 
