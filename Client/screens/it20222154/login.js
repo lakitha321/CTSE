@@ -1,84 +1,60 @@
-import React, { Component } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import React, {useEffect, useState} from "react";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import axios from 'axios';
 
-class Login extends Component {
-  constructor(props) {
-    console.log("hi");
-    super(props);
-    this.state = {
-      student_email: '',
-      password: '',
-      emailError: '',
-      passwordError: ''
-    };
+export default App = ({navigation}) => {
+
+  const adminMail = 'admin@gmail.com';
+  const adminPass = 'admin';
+  
+  const [email, setemail] = useState([]);
+  const [pass, setpass] = useState([]);
+
+  const login = async () => {
+    if(adminMail === email && adminPass === pass){
+      navigation.navigate('Staff');
+    }
+    else{
+    try {
+      const response = await axios.post(`https://ctse-node-server.herokuapp.com/students/log/${email}`, {
+        password: pass
+      });
+      if (response.data.status) {
+        navigation.navigate('Home',{
+          logged:response.data.details
+        });
+        Alert.alert('Logged Successfuly');
+      }
+    } catch (error) {
+      console.log(response.data);
+    }
   }
-
-  validate = () => {
-    let emailError = '';
-    let passwordError = '';
-
-    // check for email format
-    const emailRegex = /\S+@\S+\.\S+/;
-    if (!emailRegex.test(this.state. student_email)) {
-      emailError = 'Invalid email format';
-    }
-
-    // check for empty password field
-    if (!this.state.password) {
-      passwordError = 'Password cannot be empty';
-    }
-
-    // set error messages to state if any
-    if (emailError || passwordError) {
-      this.setState({ emailError, passwordError });
-      return false;
-    }
-
-    return true;
   };
 
-//   login = async () => {
-//     if (this.validate()) {
-//       try {
-//         const response = await axios.post('http://localhost:5000/student/login', {
-//           student_email: this.state.student_email,
-//           password: this.state.password
-//         });
-//         if (response.status === 200) {
-//           // navigate to the next screen on successful login
-//           this.props.navigation.navigate('Home');
-//         }
-//       } catch (error) {
-//         console.log(error);
-//       }
-//     }
-//   };
-
-  render() {
+  // render() {
     return (
       <View style={styles.container}>
         <Text style={styles.header}>Login</Text>
         <TextInput
           style={styles.input}
           placeholder="Email"
-          onChangeText={(student_email) => this.setState({  student_email })}
+          onChangeText={setemail}
         />
-        <Text style={styles.error}>{this.state.emailError}</Text>
+        {/* <Text style={styles.error}>{this.state.emailError}</Text> */}
         <TextInput
           style={styles.input}
           placeholder="Password"
-          onChangeText={(password) => this.setState({ password })}
+          onChangeText={setpass}
           secureTextEntry
         />
-        <Text style={styles.error}>{this.state.passwordError}</Text>
-        <TouchableOpacity style={styles.button} onPress={this.login}>
+        {/* <Text style={styles.error}>{this.state.passwordError}</Text> */}
+        <TouchableOpacity style={styles.button} onPress={() => {login()}}>
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
       </View>
     );
-  }
 }
+// }
 
 const styles = StyleSheet.create({
   container: {
@@ -115,4 +91,3 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Login;
