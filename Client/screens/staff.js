@@ -59,14 +59,14 @@ const HorizontalScrollCards = ({navigation}) => {
         style={{
             flexDirection: 'row'
         }}>
-        <TouchableOpacity onPress={() => {navigation.navigate('AddNotice')}}>
+        <TouchableOpacity onPress={() => {navigation.navigate('AttendanceScanner')}}>
             <View style={styles.card}>
                 <Text style={styles.title}>Mark</Text>
                 <Text style={styles.title}>Attendance</Text>
                 <Image source={require('../assets/attendance.png')} style={styles.image} />
             </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => {navigation.navigate('AddNotice')}}>
+        <TouchableOpacity onPress={() => {navigation.navigate('AllAttendances')}}>
             <View style={styles.card}>
             <Text style={styles.title}>View</Text>
             <Text style={styles.title}>Attendance</Text>
