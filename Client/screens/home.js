@@ -39,7 +39,9 @@ const HorizontalScrollCards = ({navigation}) => {
           logged:route.params.logged
         })
         else if(id == 2)
-        navigation.navigate('QRCode')
+        navigation.navigate('QRCode',{
+          logged:route.params.logged
+        })
         else if(id == 3)
         navigation.navigate('AttendanceScanner')
         else if(id == 4)

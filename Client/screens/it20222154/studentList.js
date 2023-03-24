@@ -30,8 +30,8 @@ const StudentList = ({ navigation }) => {
 
   const handlePress = (item) => {
     setSelectedItem(item);
-    navigation.navigate('AttendanceDetails', {
-      sitem: item,
+    navigation.navigate('Profile', {
+      logged: item,
     });
   };
 
@@ -39,7 +39,7 @@ const StudentList = ({ navigation }) => {
     return (
       <ScrollView>
       <TouchableOpacity
-        style={[styles.item, selectedItem?._id === item._id && styles.selected]}
+        // style={[styles.item, selectedItem?._id === item._id && styles.selected]}
         onPress={() => handlePress(item)}
       >
         <View style={styles.row}>
@@ -66,6 +66,7 @@ const StudentList = ({ navigation }) => {
         <Text style={styles.buttonText}>Delete</Text>
         </TouchableOpacity>
       </TouchableOpacity>
+      <Text></Text>
       </ScrollView>
     );
   };

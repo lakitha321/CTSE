@@ -75,7 +75,7 @@ router.post(
       res.send(Stud);
       console.log(Stud.student_name);
     } catch (error) {
-      res.json('Error while getting list of Students. Try again later.');
+      res.send('Error while getting list of Students. Try again later.');
     }
   });
   

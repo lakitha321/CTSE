@@ -51,10 +51,10 @@ const StylishSelection = ({navigation}) => {
 
   const sendMail = async () => {
     const newMail = {
-      // p_email: route.params.student.parent_email,
-      // s_email: route.params.student.student_email,
-      p_email: 'lkthmtchl@gmail.com',
-      s_email: 'lkthmtchl@gmail.com',
+      p_email: route.params.student.parent_email,
+      s_email: route.params.student.student_email,
+      // p_email: 'lkthmtchl@gmail.com',
+      // s_email: 'lkthmtchl@gmail.com',
       price: '1500',
       month: route.params.month,
       year: route.params.year,

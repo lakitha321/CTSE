@@ -16,6 +16,8 @@ import {
 
 const App = ({navigation}) => {
 
+    const route = useRoute();
+
     const currentYear = new Date().getFullYear();
     const [year, setYear] = useState(currentYear);
     const [month, setmonth] = useState('');
@@ -37,7 +39,8 @@ const App = ({navigation}) => {
 
     const [show, setShow] = useState(false);
 
-    const id = '64157ce58156e34dfcd66ea0';
+    const id = route.params.stud._id;
+    // ${id}
 
     useEffect(() => {
         refreshConetnt();
@@ -45,84 +48,84 @@ const App = ({navigation}) => {
 
     const refreshConetnt = () => {
         function getJan(){
-            axios.get(`https://ctse-node-server.herokuapp.com/payments/get/64157ce58156e34dfcd66ea0/${year}/January`).then((res) => {
+            axios.get(`https://ctse-node-server.herokuapp.com/payments/get/${id}/${year}/January`).then((res) => {
                 setJan(res.data);
             }).catch((err) => {
                 alert(err);
             })
         }
         function getFeb(){
-            axios.get(`https://ctse-node-server.herokuapp.com/payments/get/64157ce58156e34dfcd66ea0/${year}/February`).then((res) => {
+            axios.get(`https://ctse-node-server.herokuapp.com/payments/get/${id}/${year}/February`).then((res) => {
                 setfeb(res.data);
             }).catch((err) => {
                 alert(err);
             })
         }
         function getMar(){
-            axios.get(`https://ctse-node-server.herokuapp.com/payments/get/64157ce58156e34dfcd66ea0/${year}/March`).then((res) => {
+            axios.get(`https://ctse-node-server.herokuapp.com/payments/get/${id}/${year}/March`).then((res) => {
                 setmar(res.data);
             }).catch((err) => {
                 alert(err);
             })
         }
         function getApr(){
-            axios.get(`https://ctse-node-server.herokuapp.com/payments/get/64157ce58156e34dfcd66ea0/${year}/April`).then((res) => {
+            axios.get(`https://ctse-node-server.herokuapp.com/payments/get/${id}/${year}/April`).then((res) => {
                 setapr(res.data);
             }).catch((err) => {
                 alert(err);
             })
         }
         function getMay(){
-            axios.get(`https://ctse-node-server.herokuapp.com/payments/get/64157ce58156e34dfcd66ea0/${year}/May`).then((res) => {
+            axios.get(`https://ctse-node-server.herokuapp.com/payments/get/${id}/${year}/May`).then((res) => {
                 setmay(res.data);
             }).catch((err) => {
                 alert(err);
             })
         }
         function getJun(){
-            axios.get(`https://ctse-node-server.herokuapp.com/payments/get/64157ce58156e34dfcd66ea0/${year}/June`).then((res) => {
+            axios.get(`https://ctse-node-server.herokuapp.com/payments/get/${id}/${year}/June`).then((res) => {
                 setjun(res.data);
             }).catch((err) => {
                 alert(err);
             })
         }
         function getJul(){
-            axios.get(`https://ctse-node-server.herokuapp.com/payments/get/64157ce58156e34dfcd66ea0/${year}/July`).then((res) => {
+            axios.get(`https://ctse-node-server.herokuapp.com/payments/get/${id}/${year}/July`).then((res) => {
                 setjul(res.data);
             }).catch((err) => {
                 alert(err);
             })
         }
         function getAug(){
-            axios.get(`https://ctse-node-server.herokuapp.com/payments/get/64157ce58156e34dfcd66ea0/${year}/August`).then((res) => {
+            axios.get(`https://ctse-node-server.herokuapp.com/payments/get/${id}/${year}/August`).then((res) => {
                 setaug(res.data);
             }).catch((err) => {
                 alert(err);
             })
         }
         function getSep(){
-            axios.get(`https://ctse-node-server.herokuapp.com/payments/get/64157ce58156e34dfcd66ea0/${year}/September`).then((res) => {
+            axios.get(`https://ctse-node-server.herokuapp.com/payments/get/${id}/${year}/September`).then((res) => {
                 setsep(res.data);
             }).catch((err) => {
                 alert(err);
             })
         }
         function getOct(){
-            axios.get(`https://ctse-node-server.herokuapp.com/payments/get/64157ce58156e34dfcd66ea0/${year}/October`).then((res) => {
+            axios.get(`https://ctse-node-server.herokuapp.com/payments/get/${id}/${year}/October`).then((res) => {
                 setoct(res.data);
             }).catch((err) => {
                 alert(err);
             })
         }
         function getNov(){
-            axios.get(`https://ctse-node-server.herokuapp.com/payments/get/64157ce58156e34dfcd66ea0/${year}/November`).then((res) => {
+            axios.get(`https://ctse-node-server.herokuapp.com/payments/get/${id}/${year}/November`).then((res) => {
                 setnov(res.data);
             }).catch((err) => {
                 alert(err);
             })
         }
         function getDec(){
-            axios.get(`https://ctse-node-server.herokuapp.com/payments/get/64157ce58156e34dfcd66ea0/${year}/December`).then((res) => {
+            axios.get(`https://ctse-node-server.herokuapp.com/payments/get/${id}/${year}/December`).then((res) => {
                 setdec(res.data);
             }).catch((err) => {
                 alert(err);
@@ -224,7 +227,7 @@ const App = ({navigation}) => {
     const deletePayment = async (id) => {
         await axios.delete(`https://ctse-node-server.herokuapp.com/payments/delete/${id}`).then((res) => {
             Alert.alert(res.data.status);
-            setRefresh(!refresh);
+            refreshConetnt();
         }).catch((err) => {
             alert(err);
         })
@@ -233,13 +236,13 @@ const App = ({navigation}) => {
     const editPaymentType = async (id, type) => {
         await axios.put(`https://ctse-node-server.herokuapp.com/payments/edit/${id}/${type}`).then((res) => {
             Alert.alert(res.data);
-            setRefresh(!refresh);
+            refreshConetnt();
         }).catch((err) => {
             alert(err);
         })
     }
 
-    const route = useRoute();
+    
 
     const makePayment = (m) => {
         navigation.navigate('SubmitPayment',{
@@ -253,10 +256,10 @@ const App = ({navigation}) => {
     return (
         <View style={styles.container}>
         <View style={styles.box1}>
-        <Text style={styles.profileText}>Student : {route.params.stud.student_name}</Text>
-        <Text style={styles.profileText}>NIC         : {route.params.stud.nic}</Text>
-        <Text style={styles.profileText}>Batch     : {route.params.stud.student_name}</Text>
-        <Text style={styles.profileText}>Year       : {route.params.stud.student_name}</Text>
+        <Text style={styles.profileText}>ID : {route.params.stud._id}</Text>
+        <Text style={styles.profileText}>Student : {route.params.stud.student_name}    NIC : {route.params.stud.nic}</Text>
+        <Text style={styles.profileText}>Batch     : {route.params.stud.batch}</Text>
+        <Text style={styles.profileText}>Registered Date       : {route.params.stud.registered_date}</Text>
         </View>
         <Text style={styles.profileText}>{year}</Text>
         <View

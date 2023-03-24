@@ -5,14 +5,16 @@ import {
   View,
   Text
 } from "react-native";
+import {useRoute} from '@react-navigation/native';
 
 
 const App = () => {
+  const route = useRoute();
   return (
     <View style={styles.container}>
       <View style={styles.barcodebox}>
         <QRCode
-        value="64157ce58156e34dfcd66ea0"
+        value={route.params.logged._id}
         size={200}
         bgColor="#000"
         fgColor="#fff"
