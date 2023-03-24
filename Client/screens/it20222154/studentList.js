@@ -28,12 +28,12 @@ const StudentList = ({ navigation }) => {
     getData();
   }, []);
 
-//   const handlePress = (item) => {
-//     setSelectedItem(item);
-//     navigation.navigate('AttendanceDetails', {
-//       sitem: item,
-//     });
-//   };
+  const handlePress = (item) => {
+    setSelectedItem(item);
+    navigation.navigate('AttendanceDetails', {
+      sitem: item,
+    });
+  };
 
   const renderItem = ({ item }) => {
     return (
@@ -73,8 +73,8 @@ const StudentList = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.container2}>
-      <Text style={styles.toptext1}>Attendance Collection</Text>
-        <Text style={styles.toptext}>Tap on a widget to view more details</Text>
+      <Text style={styles.toptext1}>Student List</Text>
+        
         <FlatList
           data={data}
           renderItem={renderItem}
