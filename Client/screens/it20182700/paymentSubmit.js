@@ -32,6 +32,8 @@ const StylishSelection = ({navigation}) => {
         price: '1500',
         status: selectedItem.name,
         sid: route.params.sid,
+        name: route.params.student.student_name,
+        nic: route.params.student.nic,
         month: route.params.month,
         year: route.params.year
     }

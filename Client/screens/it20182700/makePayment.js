@@ -9,7 +9,8 @@ import {
   Button,
   ScrollView,
   Pressable,
-  ActivityIndicator
+  ActivityIndicator,
+  Alert
 } from "react-native";
 
 
@@ -18,6 +19,8 @@ const App = ({navigation}) => {
     const currentYear = new Date().getFullYear();
     const [year, setYear] = useState(currentYear);
     const [month, setmonth] = useState('');
+
+    const [refresh, setRefresh] = useState(false);
 
     const [jan, setJan] = useState();
     const [feb, setfeb] = useState();
@@ -160,6 +163,82 @@ const App = ({navigation}) => {
         setdec();
     };
 
+    const handleDelete = (id) => {
+        Alert.alert(
+            'Confirm',
+            'Are you sure you want to delete this payment?',
+            [
+              {
+                text: 'Cancel',
+                style: 'cancel',
+              },
+              {
+                text: 'Yes',
+                onPress: () => {
+                    deletePayment(id);
+                },
+              },
+            ],
+        );
+    };
+
+    const handleEdit = (id, type) => {
+        if(type === 'Cash'){
+            Alert.alert(
+                'Confirm',
+                'Are you sure you want to change the payment type from Cash to Card?',
+                [
+                {
+                    text: 'Cancel',
+                    style: 'cancel',
+                },
+                {
+                    text: 'Yes',
+                    onPress: () => {
+                        editPaymentType(id, 'Card');
+                    },
+                },
+                ],
+            );
+        }
+        if(type === 'Card'){
+            Alert.alert(
+                'Confirm',
+                'Are you sure you want to change the payment type from Card to Cash?',
+                [
+                {
+                    text: 'Cancel',
+                    style: 'cancel',
+                },
+                {
+                    text: 'Yes',
+                    onPress: () => {
+                        editPaymentType(id, 'Cash');
+                    },
+                },
+                ],
+            );
+        }
+    };
+
+    const deletePayment = async (id) => {
+        await axios.delete(`https://ctse-node-server.herokuapp.com/payments/delete/${id}`).then((res) => {
+            Alert.alert(res.data.status);
+            setRefresh(!refresh);
+        }).catch((err) => {
+            alert(err);
+        })
+    }
+
+    const editPaymentType = async (id, type) => {
+        await axios.put(`https://ctse-node-server.herokuapp.com/payments/edit/${id}/${type}`).then((res) => {
+            Alert.alert(res.data);
+            setRefresh(!refresh);
+        }).catch((err) => {
+            alert(err);
+        })
+    }
+
     const route = useRoute();
 
     const makePayment = (m) => {
@@ -206,12 +285,19 @@ const App = ({navigation}) => {
                 <View>
                     {!(jan.price === 'undifined') &&
                     <>
+                    <View style={styles.container3}>
                     <Text style={styles.text}>JANUARY</Text>
                     <View style={styles.container2}>
                     <Text style={styles.text2}>Payment Date : {jan.date}</Text>
                     <Text style={styles.text2}>Payment Time : {jan.time}</Text>
                     <Text style={styles.text2}>Amount : {jan.price}</Text>
                     <Text style={styles.text2}>Payment Type : {jan.status}</Text>
+                    </View>
+                    </View>
+                    <View style={styles.buttonContainer}>
+                    <Button title="Delete" onPress={() => handleDelete(jan._id)} color='#c70000' />
+                    <View style={{ width: 10 }} />
+                    <Button title="Change Payment Type" onPress={() => handleEdit(jan._id, jan.status)} />
                     </View>
                     </>
                     }
@@ -244,12 +330,19 @@ const App = ({navigation}) => {
                 <View>
                     {!(feb.price === 'undifined') &&
                     <>
+                    <View style={styles.container3}>
                     <Text style={styles.text}>FEBRUARY</Text>
                     <View style={styles.container2}>
                     <Text style={styles.text2}>Payment Date : {feb.date}</Text>
                     <Text style={styles.text2}>Payment Time : {feb.time}</Text>
                     <Text style={styles.text2}>Amount : {feb.price}</Text>
                     <Text style={styles.text2}>Payment Type : {feb.status}</Text>
+                    </View>
+                    </View>
+                    <View style={styles.buttonContainer}>
+                    <Button title="Delete" onPress={() => handleDelete(feb._id)} color='#c70000' />
+                    <View style={{ width: 10 }} />
+                    <Button title="Change Payment Type" onPress={() => handleEdit(feb._id, feb.status)} />
                     </View>
                     </>
                     }
@@ -282,12 +375,19 @@ const App = ({navigation}) => {
                 <View>
                     {!(mar.price === 'undifined') &&
                     <>
+                    <View style={styles.container3}>
                     <Text style={styles.text}>MARCH</Text>
                     <View style={styles.container2}>
                     <Text style={styles.text2}>Payment Date : {mar.date}</Text>
                     <Text style={styles.text2}>Payment Time : {mar.time}</Text>
                     <Text style={styles.text2}>Amount : {mar.price}</Text>
                     <Text style={styles.text2}>Payment Type : {mar.status}</Text>
+                    </View>
+                    </View>
+                    <View style={styles.buttonContainer}>
+                    <Button title="Delete" onPress={() => handleDelete(mar._id)} color='#c70000' />
+                    <View style={{ width: 10 }} />
+                    <Button title="Change Payment Type" onPress={() => handleEdit(mar._id, mar.status)} />
                     </View>
                     </>
                     }
@@ -320,12 +420,19 @@ const App = ({navigation}) => {
                 <View>
                     {!(apr.price === 'undifined') &&
                     <>
+                    <View style={styles.container3}>
                     <Text style={styles.text}>APRIL</Text>
                     <View style={styles.container2}>
                     <Text style={styles.text2}>Payment Date : {apr.date}</Text>
                     <Text style={styles.text2}>Payment Time : {apr.time}</Text>
                     <Text style={styles.text2}>Amount : {apr.price}</Text>
                     <Text style={styles.text2}>Payment Type : {apr.status}</Text>
+                    </View>
+                    </View>
+                    <View style={styles.buttonContainer}>
+                    <Button title="Delete" onPress={() => handleDelete(apr._id)} color='#c70000' />
+                    <View style={{ width: 10 }} />
+                    <Button title="Change Payment Type" onPress={() => handleEdit(apr._id, apr.status)} />
                     </View>
                     </>
                     }
@@ -358,12 +465,19 @@ const App = ({navigation}) => {
                 <View>
                     {!(may.price === 'undifined') &&
                     <>
+                    <View style={styles.container3}>
                     <Text style={styles.text}>MAY</Text>
                     <View style={styles.container2}>
                     <Text style={styles.text2}>Payment Date : {may.date}</Text>
                     <Text style={styles.text2}>Payment Time : {may.time}</Text>
                     <Text style={styles.text2}>Amount : {may.price}</Text>
                     <Text style={styles.text2}>Payment Type : {may.status}</Text>
+                    </View>
+                    </View>
+                    <View style={styles.buttonContainer}>
+                    <Button title="Delete" onPress={() => handleDelete(may._id)} color='#c70000' />
+                    <View style={{ width: 10 }} />
+                    <Button title="Change Payment Type" onPress={() => handleEdit(may._id, may.status)} />
                     </View>
                     </>
                     }
@@ -396,12 +510,19 @@ const App = ({navigation}) => {
                 <View>
                     {!(jun.price === 'undifined') &&
                     <>
+                    <View style={styles.container3}>
                     <Text style={styles.text}>JUNE</Text>
                     <View style={styles.container2}>
                     <Text style={styles.text2}>Payment Date : {jun.date}</Text>
                     <Text style={styles.text2}>Payment Time : {jun.time}</Text>
                     <Text style={styles.text2}>Amount : {jun.price}</Text>
                     <Text style={styles.text2}>Payment Type : {jun.status}</Text>
+                    </View>
+                    </View>
+                    <View style={styles.buttonContainer}>
+                    <Button title="Delete" onPress={() => handleDelete(jun._id)} color='#c70000' />
+                    <View style={{ width: 10 }} />
+                    <Button title="Change Payment Type" onPress={() => handleEdit(jun._id, jun.status)} />
                     </View>
                     </>
                     }
@@ -434,12 +555,19 @@ const App = ({navigation}) => {
                 <View>
                     {!(jul.price === 'undifined') &&
                     <>
+                    <View style={styles.container3}>
                     <Text style={styles.text}>JULY</Text>
                     <View style={styles.container2}>
                     <Text style={styles.text2}>Payment Date : {jul.date}</Text>
                     <Text style={styles.text2}>Payment Time : {jul.time}</Text>
                     <Text style={styles.text2}>Amount : {jul.price}</Text>
                     <Text style={styles.text2}>Payment Type : {jul.status}</Text>
+                    </View>
+                    </View>
+                    <View style={styles.buttonContainer}>
+                    <Button title="Delete" onPress={() => handleDelete(jul._id)} color='#c70000' />
+                    <View style={{ width: 10 }} />
+                    <Button title="Change Payment Type" onPress={() => handleEdit(jul._id, jul.status)} />
                     </View>
                     </>
                     }
@@ -472,12 +600,19 @@ const App = ({navigation}) => {
                 <View>
                     {!(aug.price === 'undifined') &&
                     <>
+                    <View style={styles.container3}>
                     <Text style={styles.text}>AUGUST</Text>
                     <View style={styles.container2}>
                     <Text style={styles.text2}>Payment Date : {aug.date}</Text>
                     <Text style={styles.text2}>Payment Time : {aug.time}</Text>
                     <Text style={styles.text2}>Amount : {aug.price}</Text>
                     <Text style={styles.text2}>Payment Type : {aug.status}</Text>
+                    </View>
+                    </View>
+                    <View style={styles.buttonContainer}>
+                    <Button title="Delete" onPress={() => handleDelete(aug._id)} color='#c70000' />
+                    <View style={{ width: 10 }} />
+                    <Button title="Change Payment Type" onPress={() => handleEdit(aug._id, aug.status)} />
                     </View>
                     </>
                     }
@@ -510,12 +645,19 @@ const App = ({navigation}) => {
                 <View>
                     {!(sep.price === 'undifined') &&
                     <>
+                    <View style={styles.container3}>
                     <Text style={styles.text}>SEPTEMBER</Text>
                     <View style={styles.container2}>
                     <Text style={styles.text2}>Payment Date : {sep.date}</Text>
                     <Text style={styles.text2}>Payment Time : {sep.time}</Text>
                     <Text style={styles.text2}>Amount : {sep.price}</Text>
                     <Text style={styles.text2}>Payment Type : {sep.status}</Text>
+                    </View>
+                    </View>
+                    <View style={styles.buttonContainer}>
+                    <Button title="Delete" onPress={() => handleDelete(sep._id)} color='#c70000' />
+                    <View style={{ width: 10 }} />
+                    <Button title="Change Payment Type" onPress={() => handleEdit(sep._id, sep.status)} />
                     </View>
                     </>
                     }
@@ -548,12 +690,19 @@ const App = ({navigation}) => {
                 <View>
                     {!(oct.price === 'undifined') &&
                     <>
+                    <View style={styles.container3}>
                     <Text style={styles.text}>OCTOBER</Text>
                     <View style={styles.container2}>
                     <Text style={styles.text2}>Payment Date : {oct.date}</Text>
                     <Text style={styles.text2}>Payment Time : {oct.time}</Text>
                     <Text style={styles.text2}>Amount : {oct.price}</Text>
                     <Text style={styles.text2}>Payment Type : {oct.status}</Text>
+                    </View>
+                    </View>
+                    <View style={styles.buttonContainer}>
+                    <Button title="Delete" onPress={() => handleDelete(oct._id)} color='#c70000' />
+                    <View style={{ width: 10 }} />
+                    <Button title="Change Payment Type" onPress={() => handleEdit(oct._id, oct.status)} />
                     </View>
                     </>
                     }
@@ -586,12 +735,19 @@ const App = ({navigation}) => {
                 <View>
                     {!(nov.price === 'undifined') &&
                     <>
+                    <View style={styles.container3}>
                     <Text style={styles.text}>NOVEMBER</Text>
                     <View style={styles.container2}>
                     <Text style={styles.text2}>Payment Date : {nov.date}</Text>
                     <Text style={styles.text2}>Payment Time : {nov.time}</Text>
                     <Text style={styles.text2}>Amount : {nov.price}</Text>
                     <Text style={styles.text2}>Payment Type : {nov.status}</Text>
+                    </View>
+                    </View>
+                    <View style={styles.buttonContainer}>
+                    <Button title="Delete" onPress={() => handleDelete(nov._id)} color='#c70000' />
+                    <View style={{ width: 10 }} />
+                    <Button title="Change Payment Type" onPress={() => handleEdit(nov._id, nov.status)} />
                     </View>
                     </>
                     }
@@ -624,12 +780,19 @@ const App = ({navigation}) => {
                 <View>
                     {!(dec.price === 'undifined') &&
                     <>
+                    <View style={styles.container3}>
                     <Text style={styles.text}>DECEMBER</Text>
                     <View style={styles.container2}>
                     <Text style={styles.text2}>Payment Date : {dec.date}</Text>
                     <Text style={styles.text2}>Payment Time : {dec.time}</Text>
                     <Text style={styles.text2}>Amount : {dec.price}</Text>
                     <Text style={styles.text2}>Payment Type : {dec.status}</Text>
+                    </View>
+                    </View>
+                    <View style={styles.buttonContainer}>
+                    <Button title="Delete" onPress={() => handleDelete(dec._id)} color='#c70000' />
+                    <View style={{ width: 10 }} />
+                    <Button title="Change Payment Type" onPress={() => handleEdit(dec._id, dec.status)} />
                     </View>
                     </>
                     }
@@ -670,6 +833,9 @@ const styles = StyleSheet.create({
     },
     container2: {
         marginTop:10
+    },
+    container3: {
+        marginLeft:20
     },
     maintext: {
     fontSize: 16,
@@ -739,7 +905,13 @@ const styles = StyleSheet.create({
     dialogContainer: {
         justifyContent: 'center',
         alignItems: 'center'
-    }
+    },
+    buttonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginHorizontal: 20,
+        marginVertical: 10,
+    },
 })
 
 export default App;
