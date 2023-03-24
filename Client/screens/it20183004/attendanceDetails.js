@@ -4,29 +4,36 @@ import {
   View,
   Text,
   Button,
-  TouchableOpacity
+  TouchableOpacity,
+  TextInput,
+  Alert
 } from "react-native";
 import {useRoute} from '@react-navigation/native';
+import axios from 'axios';
 
 
-const App = ({}) => {
+const App = ({ navigation }) => {
   const route = useRoute();
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [year, setYear] = useState(route.params.sitem.year);
+  const [month, setMonth] = useState(route.params.sitem.month);
+  const [date, setDate] = useState(route.params.sitem.day);
 
-  // const UpdateAttendance = {
-  //   sid: student._id,
-  //   batch: 'tempbatch',
-  //   class_: 'Grade 12',
-  //   name: student.student_name,
-  //   nic: student.nic  
-  // }
-  // await axios.post('https://ctse-node-server.herokuapp.com/attendance/upload', newAttendance)
-  // .then(response => {
-  //   Alert.alert(response.data);
-  // })
-  // .catch(error => {
-  //   Alert.alert(error);
-  // });
-  // }; 
+  const handlePress = async () => {
+    const editAttendance = {
+      year: year,
+      month: month,
+      day: date,
+  }
+  await axios.put(`https://ctse-node-server.herokuapp.com/attendance/edit/${route.params.sitem._id}`, editAttendance)
+  .then(response => {
+      navigation.goBack();
+    Alert.alert(response.data);
+  })
+  .catch(error => {
+    Alert.alert('Registration Failed', 'Student registration failed. Please try again.');
+  });
+  };
 
   return(
     <>
@@ -51,33 +58,40 @@ const App = ({}) => {
         </View>
         <View style={styles.row}>
         <Text style={styles.label}>Year</Text>
-        <Text style={styles.value}>{route.params.sitem.year}</Text>
+        <TextInput
+        style={styles.input}
+        onChangeText={setYear}
+        defaultValue={route.params.sitem.year}
+        keyboardType='numeric'
+        />
         </View>
         <View style={styles.row}>
         <Text style={styles.label}>Month</Text>
-        <Text style={styles.value}>{route.params.sitem.month}</Text>
+        <TextInput
+        style={styles.input}
+        onChangeText={setMonth}
+        defaultValue={route.params.sitem.month}
+        keyboardType='numeric'
+        />
         </View>
         <View style={styles.row}>
         <Text style={styles.label}>Day</Text>
-        <Text style={styles.value}>{route.params.sitem.day}</Text>
+        <TextInput
+        style={styles.input}
+        onChangeText={setDate}
+        defaultValue={route.params.sitem.day}
+        keyboardType='numeric'
+        />
         </View>
         <View style={styles.row}>
         <Text style={styles.label}>Time</Text>
         <Text style={styles.value}>{route.params.sitem.time}</Text>
         </View>
-        {/* <View>
-        <Button 
-        title={'Edit Attendance'}
-        onPress={() => UpdateAttendance()}
-        style={styles.button}/>
-        </View> */}
-        <TouchableOpacity style={styles.button} onPress={() => handleDelete(item._id)}>
+        <TouchableOpacity style={styles.button} onPress={() => handlePress()}>
         <Text style={styles.buttonText}>Update Details</Text>
         </TouchableOpacity>
     </View>
     </View>
-
-
     </>
   )
 }

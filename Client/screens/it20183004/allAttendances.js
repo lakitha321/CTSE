@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, FlatList, TouchableOpacity, Button, Alert,ScrollView,setRefresh} from 'react-native';
+import { StyleSheet, View, Text, FlatList, TouchableOpacity, Button, Alert,ScrollView,RefreshControl} from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import axios from 'axios';
 
@@ -12,9 +12,16 @@ const StylishSelection = ({ navigation }) => {
   const [data, setData] = useState();
   const [numColumns, setNumColumns] = useState(1);
   const [refresh, setRefresh] = useState(false);
- 
+  
+  const [refresfIconState, setRefresfIconState] = useState(false);
 
-  useEffect(() => {
+  const onRefreshState = () => {
+    setRefresfIconState(true);
+    refreshContent();
+    setRefresfIconState(false);
+  }
+
+  const refreshContent = () => {
     function getData() {
       axios
         .get(`https://ctse-node-server.herokuapp.com/attendance/getAll`)
@@ -26,6 +33,10 @@ const StylishSelection = ({ navigation }) => {
         });
     }
     getData();
+  }
+
+  useEffect(() => {
+    refreshContent();
   }, []);
 
   const handlePress = (item) => {
@@ -37,7 +48,7 @@ const StylishSelection = ({ navigation }) => {
 
   const renderItem = ({ item }) => {
     return (
-      <ScrollView>
+      <ScrollView refreshControl={<RefreshControl onRefresh={onRefreshState} refreshing={refresfIconState}/>}>
       <TouchableOpacity
         style={[styles.item, selectedItem?._id === item._id && styles.selected]}
         onPress={() => handlePress(item)}
@@ -98,7 +109,6 @@ const handleDelete = (id) => {
 const deleteAttendance = async (id) => {
   await axios.delete(`https://ctse-node-server.herokuapp.com/attendance/delete/${id}`).then((res) => {
       Alert.alert(res.data.status);
-      setRefresh(!refresh);
   }).catch((err) => {
       alert(err);
   })
