@@ -9,16 +9,18 @@ router.post(
 
       var today = new Date();
       var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-      var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      var time = today.getHours() + ":" + today.getMinutes();
 
       try {
-        const {price, status, sid, month, year} = req.body;
+        const {price, status, sid, name, nic, month, year} = req.body;
         const newPayment = new Payment({
           date,
           time,
           price,
           status,
           sid,
+          name,
+          nic,
           month,
           year
         });
@@ -103,12 +105,11 @@ router.post(
     }
   });
   
-  router.route('/edit/:id').put(async (req, res) => {
+  router.route('/edit/:id/:type').put(async (req, res) => {
   
     let id = req.params.id;
-    const {price, status, sid, month, year} = req.body;
 
-    const update = await Payment.findByIdAndUpdate(id, {date:date, time:time, price:price, status:status, sid:sid, month:month, year:year}).then(()=>{
+    const update = await Payment.findByIdAndUpdate(id, {status:req.params.type}).then(()=>{
         res.json("Updated");
     }).catch((err)=>{
         res.json("Error");

@@ -22,6 +22,14 @@ const paymentSchema = new mongoose.Schema(
       type: String,
       required: true
     },
+    name: {
+      type: String,
+      required: true
+    },
+    nic: {
+      type: String,
+      required: true
+    },
     month: {
       type: String,
       required: true

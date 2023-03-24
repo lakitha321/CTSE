@@ -5,19 +5,19 @@ const CARD_WIDTH = 100;
 const CARD_HEIGHT = 100;
 
 const cards = [
-  { id: 1, image: require('../assets/profile.png'), title: 'My Profile'},
-  { id: 2, image: require('../assets/QRIcon.png'), title: 'My QR'},
-  { id: 3, image: require('../assets/attendance.png'), title: 'Attendance'},
-  { id: 4, image: require('../assets/homework.png'), title: 'Homework'},
-  { id: 5, image: require('../assets/payment.png'), title: 'Payments'},
+  { id: 1, image: require('../../assets/profile.png'), title: 'My Profile'},
+  { id: 2, image: require('../../assets/QRIcon.png'), title: 'My QR'},
+  { id: 3, image: require('../../assets/attendance.png'), title: 'Attendance'},
+  { id: 4, image: require('../../assets/homework.png'), title: 'Homework'},
+  { id: 5, image: require('../../assets/payment.png'), title: 'Payments'},
 ];
 
 const notices = [
-  { _id: 1, title: 'notice 1'},
-  { _id: 2, title: 'notice 2'},
-  { _id: 3, title: 'notice 3'},
-  { _id: 4, title: 'notice 4'},
-  { _id: 5, title: 'notice 5'},
+    { _id: 1, title: 'notice 1'},
+    { _id: 2, title: 'notice 2'},
+    { _id: 3, title: 'notice 3'},
+    { _id: 4, title: 'notice 4'},
+    { _id: 5, title: 'notice 5'},
 ];
 
 const HorizontalScrollCards = ({navigation}) => {
@@ -61,7 +61,6 @@ const HorizontalScrollCards = ({navigation}) => {
           </View>
         </TouchableOpacity>
         ))}
-        <Text></Text>
       </ScrollView>
     </View>
     </>
