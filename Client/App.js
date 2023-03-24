@@ -20,7 +20,7 @@ import AttendanceScanner from './screens/it20183004/scanner';
 import AllAttendances from './screens/it20183004/allAttendances';
 import AttendanceDetails from './screens/it20183004/attendanceDetails';
 
-// import Start3 from './screens/it20202286/Homework/addHomework';
+import Start3 from './screens/it20202286/start';
 import Notices from './screens/it20202286/Notices/addNotice';
 import Homework from './screens/it20202286/Homework/addHomework';
 import AllNotices from './screens/it20202286/Notices/allNotices';
@@ -59,7 +59,7 @@ export default function App() {
         <Stack.Screen name="AllAttendances" component={AllAttendances} />
         <Stack.Screen name="AttendanceDetails" component={AttendanceDetails} />
 
-        {/* <Stack.Screen name="Start3" component={Start3} /> */}
+        <Stack.Screen name="Start3" component={Start3} />
         <Stack.Screen name="Notices" component={Notices} />
         <Stack.Screen name="Homework" component={Homework} />
         <Stack.Screen name="AllNotices" component={AllNotices} />
@@ -67,7 +67,7 @@ export default function App() {
 
         <Stack.Screen name="Start4" component={Start4} />
         <Stack.Screen name="Register" component={Register} />
-        <Stack.Screen name="AttendanceScanner" component={AttendanceScanner} />
+      
        
         
 

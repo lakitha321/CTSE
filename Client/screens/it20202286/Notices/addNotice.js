@@ -36,7 +36,7 @@ const RegistrationForm = () => {
         classDay: classDay,
         batch: batch
     }
-    await axios.post('https://ctse-node-server.herokuapp.com/students/upload', newStudent)
+    await axios.post('https://ctse-node-server.herokuapp.com/notices/upload', newStudent)
     .then(response => {
       Alert.alert(response.data);
     })
