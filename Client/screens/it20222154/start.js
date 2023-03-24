@@ -19,6 +19,13 @@ const App = ({navigation}) => {
         </View>
         <Text >Registration form</Text>
         </Pressable>
+
+        <Pressable  onPress={()=>{navigation.navigate('Login')}}>
+        <View >
+        
+        </View>
+        <Text >Login</Text>
+        </Pressable>
     </View>
     
     </>

@@ -844,12 +844,12 @@ const styles = StyleSheet.create({
     box1: {
     // alignItems: 'center',
     // justifyContent: 'center',
-    marginTop: 20,
-    height: 100,
-    width: 300,
-    overflow: 'hidden',
-    // borderRadius: 30,
-    backgroundColor: '#fff'
+        marginTop: 20,
+        height: 100,
+        width: 300,
+        overflow: 'hidden',
+        // borderRadius: 30,
+        backgroundColor: '#fff'
     },
     button: {
         marginRight: 5,

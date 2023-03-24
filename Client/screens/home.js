@@ -1,6 +1,7 @@
 import React, { useState,useEffect } from 'react';
 import axios from 'axios';
-import { View, ScrollView, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
+import {useRoute} from '@react-navigation/native';
+import { View, ScrollView, StyleSheet, Text, Image, TouchableOpacity, RefreshControl } from 'react-native';
 
 const CARD_WIDTH = 100;
 const CARD_HEIGHT = 100;
@@ -15,6 +16,8 @@ const cards = [
 
 const HorizontalScrollCards = ({navigation}) => {
 
+  const route = useRoute();
+
   // const notices = [
   //   { _id: 1, title: 'notice 1'},
   //   { _id: 2, title: 'notice 2'},
@@ -22,6 +25,13 @@ const HorizontalScrollCards = ({navigation}) => {
   //   { _id: 4, title: 'notice 4'},
   //   { _id: 5, title: 'notice 5'},
   // ];
+  const [refresfIconState, setRefresfIconState] = useState(false);
+
+  const onRefreshState = () => {
+    setRefresfIconState(true);
+    refreshContent();
+    setRefresfIconState(false);
+  }
 
     const handlePress = (id) => {
         if(id == 1)
@@ -39,15 +49,19 @@ const HorizontalScrollCards = ({navigation}) => {
   const [notices, setData] = useState();
 
   useEffect(() => {
-    function getData(){
-        axios.get(`https://ctse-node-server.herokuapp.com/notices/getByYear/AL2023`).then((res) => {
-            setData(res.data);
-        }).catch((err) => {
-            alert(err);
-        })
-    }
-    getData();
+    refreshContent();
   }, []);
+
+  const refreshContent = async () => {
+    async function getData(){
+      await axios.get(`https://ctse-node-server.herokuapp.com/notices/getByYear/${route.params.logged.batch}`).then((res) => {
+          setData(res.data);
+      }).catch((err) => {
+          alert(err);
+      })
+  }
+  getData();
+  };
 
 
   return (
@@ -67,7 +81,7 @@ const HorizontalScrollCards = ({navigation}) => {
     </View>
     <View style={styles.container2}>
     <Text style={styles.title2}>Notices</Text>
-      <ScrollView>
+      <ScrollView refreshControl={<RefreshControl onRefresh={onRefreshState} refreshing={refresfIconState}/>}>
         {notices &&
         <>
         <View style={{ width: 10 }} />

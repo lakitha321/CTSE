@@ -32,6 +32,7 @@ import AddNotice from './screens/it20202286/addNotice';
 
 import Start4 from './screens/it20222154/start';
 import Register from './screens/it20222154/registration';
+import Log from './screens/it20222154/login';
 
 
 
@@ -44,7 +45,7 @@ export default function App() {
     <NavigationContainer>
 
       <Stack.Navigator>
-        <Stack.Screen name="Nav" component={Nav} options={{title: 'Navigation'}} />
+      <Stack.Screen name="Login" component={Log} options={{title: 'Sign in'}} />
 
         <Stack.Screen name="Home" component={Home} options={{title: 'Welcome'}} />
         <Stack.Screen name="Staff" component={Staff} options={{title: 'Welcome'}} />
@@ -71,10 +72,7 @@ export default function App() {
 
         <Stack.Screen name="Start4" component={Start4} />
         <Stack.Screen name="Register" component={Register} />
-      
-       
         
-
       </Stack.Navigator>
  
     </NavigationContainer>

@@ -13,7 +13,7 @@ const AttendanceForm = () => {
 
   const handleSubmit = async () => {
     
-    const newAttendance = {
+  const newAttendance = {
       sid: studentId,
       batch: batch,
       class: section,
@@ -92,10 +92,12 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
   },
+
   label: {
     fontSize: 16,
     marginBottom: 5,
   },
+
   input: {
     borderWidth: 1,
     borderColor: '#ccc',
@@ -104,6 +106,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     fontSize: 16,
   },
+  
   button: {
     backgroundColor: '#008080',
     padding: 10,
