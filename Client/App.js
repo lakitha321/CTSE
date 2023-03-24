@@ -27,7 +27,7 @@ import Start3 from './screens/it20202286/start';
 // import Notices from './screens/it20202286/Notices/addNotice';
 // import Homework from './screens/it20202286/Homework/addHomework';
 import AllNotices from './screens/it20202286/allNotices';
-import HomeworkList from './screens/it20202286/Homework/homeworkList';
+import HomeworkList from './screens/it20202286/homeworkList';
 import AddNotice from './screens/it20202286/addNotice';
 import EditNotice from './screens/it20202286/editNotice';
 import HomeWork from './screens/it20202286/homeWork';
