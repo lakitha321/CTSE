@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, FlatList, TouchableOpacity, Button, Alert } fro
 import {useRoute} from '@react-navigation/native';
 import axios from 'axios';
 
-const homeworkList = ({navigation}) => {
+const HomeworkList = ({navigation}) => {
   const route = useRoute();
   const [selectedItem, setSelectedItem] = useState(null);
   const [method, setMethod] = useState();
@@ -89,4 +89,4 @@ profileText2: {
   },
 });
 
-export default homeworkList;
+export default HomeworkList;

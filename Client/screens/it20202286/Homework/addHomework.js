@@ -4,7 +4,7 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ScrollView 
 import axios from 'axios';
 import RoundIconBtn from './RoundIconBtn';
 
-const addHomework = () => {
+const AddHomework = () => {
   const [homeworkTitle, setHomeworkTitle] = useState('');
   const [homeworkDec, setHomeworkDec] = useState('');
   
@@ -160,6 +160,6 @@ btnContainer: {
 
 });
 
-export default addHomework;
+export default AddHomework;
 
 
