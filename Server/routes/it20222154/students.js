@@ -39,17 +39,22 @@ router.post(
     }
   );
   
-//   router.get('/getAll/:status', async (req, res) => {
-//     try {
-//       const Students = await Student.find({Student_status:req.params.status});
-//       const sortedByCreationDate = Students.sort(
-//         (a, b) => b.createdAt - a.createdAt
-//       );
-//       res.send({dat: sortedByCreationDate});
-//     } catch (error) {
-//       res.status(400).send('Error while getting list of Students. Try again later.');
-//     }
-//   });
+  router.route("/log/:email").post(async (req,res)=>{
+
+    let userEmail = req.params.email;
+    const password = req.body.password;
+
+    const Students = await Student.findOne({student_email:userEmail}).then((Students)=>{
+        if(password == Students.password){
+            res.json({status: true, details:Students});
+        }
+        else{
+            res.status(500).send({status: false});
+        }
+    }).catch((err)=>{
+        res.status(500).send({status: false});
+    })
+  })
   
   router.get('/getAll', async (req, res) => {
     try {

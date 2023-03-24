@@ -5,7 +5,10 @@ import { StyleSheet, Text, View } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
+import Nav from './screens/nav';
+
 import Home from './screens/home';
+import Staff from './screens/staff';
 
 import Start1 from './screens/it20182700/start';
 import Scanner from './screens/it20182700/scanner';
@@ -25,6 +28,7 @@ import Notices from './screens/it20202286/Notices/addNotice';
 import Homework from './screens/it20202286/Homework/addHomework';
 import AllNotices from './screens/it20202286/Notices/allNotices';
 import HomeworkList from './screens/it20202286/Homework/homeworkList';
+import AddNotice from './screens/it20202286/addNotice';
 
 import Start4 from './screens/it20222154/start';
 import Register from './screens/it20222154/registration';
@@ -40,11 +44,10 @@ export default function App() {
     <NavigationContainer>
 
       <Stack.Navigator>
-        <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{title: 'Welcome'}}
-        />
+        <Stack.Screen name="Nav" component={Nav} options={{title: 'Navigation'}} />
+
+        <Stack.Screen name="Home" component={Home} options={{title: 'Welcome'}} />
+        <Stack.Screen name="Staff" component={Staff} options={{title: 'Welcome'}} />
 
         <Stack.Screen name="Start1" component={Start1} />
         <Stack.Screen name="Scanner" component={Scanner} />
@@ -64,6 +67,7 @@ export default function App() {
         <Stack.Screen name="Homework" component={Homework} />
         <Stack.Screen name="AllNotices" component={AllNotices} />
         <Stack.Screen name="HomeworkList" component={HomeworkList} />
+        <Stack.Screen name="AddNotice" component={AddNotice} />
 
         <Stack.Screen name="Start4" component={Start4} />
         <Stack.Screen name="Register" component={Register} />
