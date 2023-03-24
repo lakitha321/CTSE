@@ -11,7 +11,7 @@ const AllNotices = ({navigation}) => {
 
     useEffect(() => {
         function getData(){
-            axios.get(`https://ctse-node-server.herokuapp.com/notices/getAll`).then((res) => {
+            axios.get(`https://ctse-node-server.herokuapp.com/notices/getByYear/AL2023`).then((res) => {
                 setData(res.data);
             }).catch((err) => {
                 alert(err);
@@ -33,8 +33,10 @@ const AllNotices = ({navigation}) => {
         style={[styles.item, selectedItem?._id === item._id && styles.selected]}
         onPress={() => handlePress(item)}
       >
-        <Text style={styles.itemText}>{item.name}</Text>
-        <Text style={styles.itemText}>{item.nic}</Text>
+        <Text style={styles.itemText}>{item.title}</Text>
+        <Text style={styles.itemText}>{item.dec}</Text>
+        <Text style={styles.itemText}>{item.batch}</Text>
+    
       </TouchableOpacity>
     );
   };

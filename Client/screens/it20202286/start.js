@@ -1,42 +1,39 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-export default function App() {
-  const [button1Pressed, setButton1Pressed] = useState(false);
-  const [button2Pressed, setButton2Pressed] = useState(false);
-  const [button3Pressed, setButton3Pressed] = useState(false);
+export default function HomeScreen() {
+  const navigation = useNavigation();
 
   const handleButton1Press = () => {
-    setButton1Pressed(!button1Pressed);
+    navigation.navigate('Notices');
   };
 
   const handleButton2Press = () => {
-    setButton2Pressed(!button2Pressed);
+    navigation.navigate('Homework');
   };
 
   const handleButton3Press = () => {
-    setButton3Pressed(!button3Pressed);
+    navigation.navigate('AllNotices');
+  };
+
+  const handleButton4Press = () => {
+    navigation.navigate('AllNotices');
   };
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        style={[styles.button, button1Pressed && styles.buttonPressed]}
-        onPress={handleButton1Press}
-      >
-        <Text style={styles.buttonText}>Button 1</Text>
+      <TouchableOpacity style={styles.button} onPress={handleButton1Press}>
+        <Text style={styles.buttonText}>Add Notice</Text>
       </TouchableOpacity>
-      <TouchableOpacity
-        style={[styles.button, button2Pressed && styles.buttonPressed]}
-        onPress={handleButton2Press}
-      >
-        <Text style={styles.buttonText}>Button 2</Text>
+      <TouchableOpacity style={styles.button} onPress={handleButton2Press}>
+        <Text style={styles.buttonText}>Add Homework</Text>
       </TouchableOpacity>
-      <TouchableOpacity
-        style={[styles.button, button3Pressed && styles.buttonPressed]}
-        onPress={handleButton3Press}
-      >
-        <Text style={styles.buttonText}>Button 3</Text>
+      <TouchableOpacity style={styles.button} onPress={handleButton3Press}>
+        <Text style={styles.buttonText}>View Notices</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={handleButton4Press}>
+        <Text style={styles.buttonText}>View Homework</Text>
       </TouchableOpacity>
     </View>
   );
@@ -45,17 +42,14 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
+    justifyContent: 'center',
   },
   button: {
     backgroundColor: '#2196F3',
     padding: 10,
     borderRadius: 5,
     margin: 10,
-  },
-  buttonPressed: {
-    backgroundColor: '#4CAF50',
   },
   buttonText: {
     color: 'white',

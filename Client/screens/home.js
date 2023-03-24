@@ -31,7 +31,7 @@ const HorizontalScrollCards = ({navigation}) => {
         else if(id == 3)
         navigation.navigate('Start2')
         else if(id == 4)
-        navigation.navigate('Start3')
+        navigation.navigate('HomeworkList')
         else if(id == 5)
         navigation.navigate('Scanner')
     };

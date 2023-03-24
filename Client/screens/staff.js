@@ -46,7 +46,7 @@ const HorizontalScrollCards = ({navigation}) => {
                 <Image source={require('../assets/write.png')} style={styles.image} />
             </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => {navigation.navigate('AddNotice')}}>
+        <TouchableOpacity onPress={() => {navigation.navigate('AllNotices')}}>
             <View style={styles.card}>
             <Text style={styles.title}>View</Text>
             <Text style={styles.title}>Notices</Text>
