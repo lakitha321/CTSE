@@ -48,9 +48,9 @@ router.post(
     }
   });
 
-  router.get('/getByYear/:year', async (req, res) => {
+  router.get('/getByYear/:year/:type', async (req, res) => {
     try {
-      const Notices = await Notice.find({year:req.params.year});
+      const Notices = await Notice.find({year:req.params.year, type:req.params.type});
     //   const sortedByCreationDate = Notices.sort(
     //     (a, b) => b.createdAt - a.createdAt
     //   );

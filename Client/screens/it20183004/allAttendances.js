@@ -48,7 +48,7 @@ const StylishSelection = ({ navigation }) => {
 
   const renderItem = ({ item }) => {
     return (
-      <ScrollView refreshControl={<RefreshControl onRefresh={onRefreshState} refreshing={refresfIconState}/>}>
+      
       <TouchableOpacity
         style={[styles.item, selectedItem?._id === item._id && styles.selected]}
         onPress={() => handlePress(item)}
@@ -65,12 +65,13 @@ const StylishSelection = ({ navigation }) => {
         <Text style={styles.buttonText}>Delete</Text>
         </TouchableOpacity>
       </TouchableOpacity>
-      </ScrollView>
+      
     );
   };
 
   return (
     <View style={styles.container}>
+      <ScrollView refreshControl={<RefreshControl onRefresh={onRefreshState} refreshing={refresfIconState}/>}>
       <View style={styles.container2}>
       <Text style={styles.toptext1}>Attendance Collection</Text>
         <Text style={styles.toptext}>Tap on a widget to view more details</Text>
@@ -82,6 +83,7 @@ const StylishSelection = ({ navigation }) => {
           key={numColumns} // Add key prop and update when numColumns changes
         />
       </View>
+      </ScrollView>
     </View>
   );
 };
@@ -109,6 +111,7 @@ const handleDelete = (id) => {
 const deleteAttendance = async (id) => {
   await axios.delete(`https://ctse-node-server.herokuapp.com/attendance/delete/${id}`).then((res) => {
       Alert.alert(res.data.status);
+      refreshContent();
   }).catch((err) => {
       alert(err);
   })

@@ -43,7 +43,7 @@ const HorizontalScrollCards = ({navigation}) => {
         else if(id == 3)
         navigation.navigate('Start2')
         else if(id == 4)
-        navigation.navigate('HomeworkList')
+        navigation.navigate('HomeWork')
         else if(id == 5)
         navigation.navigate('Scanner')
     };
@@ -56,7 +56,7 @@ const HorizontalScrollCards = ({navigation}) => {
 
   const refreshContent = async () => {
     async function getData(){
-      await axios.get(`https://ctse-node-server.herokuapp.com/notices/getByYear/${route.params.logged.batch}`).then((res) => {
+      await axios.get(`https://ctse-node-server.herokuapp.com/notices/getByYear/${route.params.logged.batch}/notice`).then((res) => {
           setData(res.data);
       }).catch((err) => {
           alert(err);
