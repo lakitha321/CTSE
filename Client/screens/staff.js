@@ -26,7 +26,7 @@ const HorizontalScrollCards = ({navigation}) => {
             <Image source={require('../assets/addStudent.png')} style={styles.image} />
             </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => {navigation.navigate('AddNotice')}}>
+        <TouchableOpacity onPress={() => {navigation.navigate('StudentList')}}>
             <View style={styles.card}>
             <Text style={styles.title}>View</Text>
             <Text style={styles.title}>Students</Text>
@@ -93,6 +93,7 @@ const HorizontalScrollCards = ({navigation}) => {
             <Image source={require('../assets/payment.png')} style={styles.image} />
             </View>
         </TouchableOpacity>
+        
         </View>
         <Text></Text>
       </ScrollView>
