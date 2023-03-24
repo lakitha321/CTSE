@@ -77,10 +77,10 @@ router.post(
   router.route('/edit/:id').put(async (req, res) => {
   
     let id = req.params.id;
-    const { sid, batch, class_, year, month, day, time, } = req.body;
+    const { year, month, day } = req.body;
 
-    const upsid = await Attendance.findByIdAndUpsid(id, {sid:sid, batch:batch, class:class_, year:year, month:month, day:day, time:time}).then(()=>{
-        res.json("Upsidd");
+    const upsid = await Attendance.findByIdAndUpdate(id, {year:year, month:month, day:day}).then(()=>{
+        res.json("Updated");
     }).catch((err)=>{
         res.json("Error");
     })
