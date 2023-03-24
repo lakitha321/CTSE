@@ -33,6 +33,7 @@ import AddNotice from './screens/it20202286/addNotice';
 import Start4 from './screens/it20222154/start';
 import Register from './screens/it20222154/registration';
 import Log from './screens/it20222154/login';
+import Profile from './screens/it20222154/profile';
 
 
 
@@ -72,6 +73,7 @@ export default function App() {
 
         <Stack.Screen name="Start4" component={Start4} />
         <Stack.Screen name="Register" component={Register} />
+        <Stack.Screen name="Profile" component={Profile} />
         
       </Stack.Navigator>
  

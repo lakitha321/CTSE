@@ -35,7 +35,9 @@ const HorizontalScrollCards = ({navigation}) => {
 
     const handlePress = (id) => {
         if(id == 1)
-        navigation.navigate('Start4')
+        navigation.navigate('Profile',{
+          logged:route.params.logged
+        })
         else if(id == 2)
         navigation.navigate('QRCode')
         else if(id == 3)
