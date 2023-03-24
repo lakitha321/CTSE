@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-=======
 const path = require('path');
 const express = require('express');
 const Notice = require('../../models/it20202286/notice');
@@ -97,4 +95,3 @@ router.post(
   });
   
   module.exports = router;
->>>>>>> Stashed changes
