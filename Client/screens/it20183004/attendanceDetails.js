@@ -62,7 +62,6 @@ const App = ({ navigation }) => {
         style={styles.input}
         onChangeText={setYear}
         defaultValue={route.params.sitem.year}
-        keyboardType='numeric'
         />
         </View>
         <View style={styles.row}>
@@ -71,7 +70,6 @@ const App = ({ navigation }) => {
         style={styles.input}
         onChangeText={setMonth}
         defaultValue={route.params.sitem.month}
-        keyboardType='numeric'
         />
         </View>
         <View style={styles.row}>
@@ -80,7 +78,6 @@ const App = ({ navigation }) => {
         style={styles.input}
         onChangeText={setDate}
         defaultValue={route.params.sitem.day}
-        keyboardType='numeric'
         />
         </View>
         <View style={styles.row}>
@@ -178,6 +175,15 @@ const styles = StyleSheet.create({
       fontSize: 16,
       textAlign: 'center',
     },
+    input: {
+      borderWidth: 1,
+      borderColor: '#ccc',
+      borderRadius: 5,
+      padding: 5,
+      marginBottom: 0,
+      fontSize: 15,
+    },
+
 })
 
 export default App;

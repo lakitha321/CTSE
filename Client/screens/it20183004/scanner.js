@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Button, ScrollView, Alert} from 'react-native';
+import { Text, View, StyleSheet, Button, ScrollView, Alert,TouchableOpacity} from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import {useRoute} from '@react-navigation/native';
 import axios from 'axios';
@@ -94,15 +94,17 @@ export default function App() {
 
       {scanned && 
       <>
-      <Button title={'Tap to Scan'} onPress={() => setScanned(false)} color='blue' />
+      <Button title={'Tap to Scan'} onPress={() => setScanned(false)} color='black' />
       <Text></Text>
-      <Button title={'Mark Attendance'} onPress={() => getStudent(text)} color='blue' />
+      <TouchableOpacity style={styles.buttonMark} onPress={() => getStudent(text)}>
+        <Text style={styles.buttonText}>Mark Attendance</Text>
+      </TouchableOpacity>
       {student &&
       <>
         <Text style={styles.maintext}>{student.student_name}</Text>
         <Text style={styles.maintext}>{student.nic}</Text>
         <Text style={styles.maintext}>{student.batch}</Text>
-        <TouchableOpacity style={styles.button} onPress={() => confirmAttendance()}>
+        <TouchableOpacity style={styles.buttonconfirm} onPress={() => confirmAttendance()}>
         <Text style={styles.buttonText}>Confirm Attendance</Text>
         </TouchableOpacity>
       </>
@@ -134,8 +136,15 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     backgroundColor: 'blue'
   },
-  button: {
+  buttonconfirm: {
     backgroundColor: 'green',
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 0,
+    alignSelf: 'center'
+  },
+  buttonMark: {
+    backgroundColor: '#2c80ec',
     padding: 10,
     borderRadius: 5,
     marginTop: 0,
