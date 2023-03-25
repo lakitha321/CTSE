@@ -9,12 +9,26 @@ const App = ({navigation}) => {
   
   const [email, setemail] = useState([]);
   const [pass, setpass] = useState([]);
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+
 
   const login = async () => {
     if(adminMail === email && adminPass === pass){
       navigation.navigate('Staff');
     }
     else{
+      if (email.length === 0) {
+        setEmailError('Please enter your email');
+      } else {
+        setEmailError('');
+      }
+      if (pass.length === 0) {
+        setPasswordError('Please enter your password');
+      } else {
+        setPasswordError('');
+      }
+      if (email.length > 0 && pass.length > 0) {
     try {
       const response = await axios.post(`https://ctse-node-server.herokuapp.com/students/log/${email}`, {
         password: pass
@@ -29,6 +43,7 @@ const App = ({navigation}) => {
       console.log(response.data);
     }
   }
+}
   };
 
   // render() {
@@ -40,13 +55,14 @@ const App = ({navigation}) => {
           placeholder="Email"
           onChangeText={setemail}
         />
-        {/* <Text style={styles.error}>{this.state.emailError}</Text> */}
+         <Text style={styles.error}>{emailError}</Text>
         <TextInput
           style={styles.input}
           placeholder="Password"
           onChangeText={setpass}
           secureTextEntry
         />
+        <Text style={styles.error}>{passwordError}</Text>
         {/* <Text style={styles.error}>{this.state.passwordError}</Text> */}
         <TouchableOpacity style={styles.button} onPress={() => {login()}}>
           <Text style={styles.buttonText}>Login</Text>
