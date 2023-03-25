@@ -79,7 +79,7 @@ const HorizontalScrollCards = ({navigation}) => {
         <TouchableOpacity key={card.id} onPress={() => handlePress(card.id)}>
           <View key={card.id} style={styles.card}>
             <Image source={card.image} style={styles.image} />
-            <Text style={styles.title}>{card.title}</Text>
+            <Text style={styles.title3}>{card.title}</Text>
           </View>
         </TouchableOpacity>
         ))}
@@ -161,6 +161,7 @@ const styles = StyleSheet.create({
     // fontWeight: 'bold',
     fontSize: 16,
     marginTop: 2,
+    color: 'red',
   },
   desc: {
     textAlign: 'center',
@@ -171,6 +172,14 @@ const styles = StyleSheet.create({
   title2: {
     marginLeft:10,
     fontSize: 20,
+    marginTop: 2,
+    fontWeight: 'bold',
+    color: 'red',
+  },
+  title3: {
+    textAlign: 'center',
+    // fontWeight: 'bold',
+    fontSize: 16,
     marginTop: 2,
   },
 });

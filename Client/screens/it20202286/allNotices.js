@@ -12,6 +12,7 @@ const AllNotices = ({navigation}) => {
   const [method, setMethod] = useState();
   const [notices, setData] = useState();
 
+
   const [refresfIconState, setRefresfIconState] = useState(false);
 
     useEffect(() => {
@@ -80,6 +81,7 @@ const AllNotices = ({navigation}) => {
     <>
     <View style={styles.container2}>
     <Text style={styles.title2}>Notices</Text>
+    
       <ScrollView refreshControl={<RefreshControl onRefresh={onRefreshState} refreshing={refresfIconState}/>}>
         {notices &&
         <>
@@ -179,6 +181,7 @@ desc: {
     fontSize: 20,
     marginTop: 2,
   },
+  
   card2: {
     marginLeft:5,
     marginTop:10,
