@@ -94,16 +94,18 @@ export default function App() {
 
       {scanned && 
       <>
-      <Button title={'Tap to Scan'} onPress={() => setScanned(false)} color='black' />
+      <TouchableOpacity style={styles.buttonTap} onPress={() => setScanned(false)}>
+        <Text style={styles.buttonText}>Tap to Scan</Text>
+      </TouchableOpacity>
       <Text></Text>
       <TouchableOpacity style={styles.buttonMark} onPress={() => getStudent(text)}>
         <Text style={styles.buttonText}>Mark Attendance</Text>
       </TouchableOpacity>
       {student &&
       <>
-        <Text style={styles.maintext}>{student.student_name}</Text>
-        <Text style={styles.maintext}>{student.nic}</Text>
-        <Text style={styles.maintext}>{student.batch}</Text>
+        <Text style={styles.maintext}>Student Name : {student.student_name}</Text>
+        <Text style={styles.maintext}>Student NIC : {student.nic}</Text>
+        <Text style={styles.maintext}>Student Batch : {student.batch}</Text>
         <TouchableOpacity style={styles.buttonconfirm} onPress={() => confirmAttendance()}>
         <Text style={styles.buttonText}>Confirm Attendance</Text>
         </TouchableOpacity>
@@ -126,6 +128,7 @@ const styles = StyleSheet.create({
   maintext: {
     fontSize: 16,
     margin: 5,
+    fontWeight : 'bold'
   },
   barcodebox: {
     alignItems: 'center',
@@ -145,6 +148,13 @@ const styles = StyleSheet.create({
   },
   buttonMark: {
     backgroundColor: '#2c80ec',
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 0,
+    alignSelf: 'center'
+  },
+  buttonTap: {
+    backgroundColor: 'black',
     padding: 10,
     borderRadius: 5,
     marginTop: 0,
