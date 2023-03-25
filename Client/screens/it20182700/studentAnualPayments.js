@@ -169,10 +169,10 @@ const App = ({navigation}) => {
     return (
         <View style={styles.container}>
         <View style={styles.box1}>
-        <Text style={styles.profileText}>ID : {route.params.stud._id}</Text>
-        <Text style={styles.profileText}>Student : {route.params.stud.student_name}    NIC : {route.params.stud.nic}</Text>
-        <Text style={styles.profileText}>Batch     : {route.params.stud.batch}</Text>
-        <Text style={styles.profileText}>Registered Date       : {route.params.stud.registered_date}</Text>
+        <Text style={styles.profileText}>ID : {route.params.logged._id}</Text>
+        <Text style={styles.profileText}>Student : {route.params.logged.student_name}    NIC : {route.params.logged.nic}</Text>
+        <Text style={styles.profileText}>Batch     : {route.params.logged.batch}</Text>
+        <Text style={styles.profileText}>Registered Date       : {route.params.logged.registered_date}</Text>
         </View>
         <Text style={styles.profileText}>{year}</Text>
         <View

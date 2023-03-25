@@ -47,7 +47,9 @@ const HorizontalScrollCards = ({navigation}) => {
         else if(id == 4)
         navigation.navigate('HomeWork')
         else if(id == 5)
-        navigation.navigate('Scanner')
+        navigation.navigate('StudentAnualPayment',{
+          logged:route.params.logged
+        })
     };
 
   const [notices, setData] = useState();

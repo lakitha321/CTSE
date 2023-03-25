@@ -18,6 +18,7 @@ import AllPayments from './screens/it20182700/allPayments';
 import SubmitPayment from './screens/it20182700/paymentSubmit';
 import ViewPay from './screens/it20182700/viewPayment';
 import StudentAnualPayment from './screens/it20182700/studentAnualPayments';
+import PayStuView from './screens/it20182700/paymentViewByStudent';
 
 import Start2 from './screens/it20183004/start';
 import AttendanceScanner from './screens/it20183004/scanner';
@@ -64,6 +65,7 @@ export default function App() {
         <Stack.Screen name="SubmitPayment" component={SubmitPayment} />
         <Stack.Screen name="ViewPay" component={ViewPay} />
         <Stack.Screen name="StudentAnualPayment" component={StudentAnualPayment} />
+        <Stack.Screen name="PayStuView" component={PayStuView} />
 
         <Stack.Screen name="Start2" component={Start2} />
         <Stack.Screen name="AttendanceScanner" component={AttendanceScanner} />

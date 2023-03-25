@@ -60,7 +60,21 @@ router.post(
       );
       res.send(sortedByCreationDate);
     } catch (error) {
-      res.json('Error while getting list of Students. Try again later.');
+      res.json('Error while getting list of Payments. Try again later.');
+    }
+  });
+
+  router.get('/getByYear/:y', async (req, res) => {
+    try {
+      const Payments = await Payment.find({
+        year:req.params.y
+      });
+      const sortedByCreationDate = Payments.sort(
+        (a, b) => b.createdAt - a.createdAt
+      );
+      res.send(sortedByCreationDate);
+    } catch (error) {
+      res.json('Error while getting list of Payments. Try again later.');
     }
   });
 
@@ -85,7 +99,7 @@ router.post(
       }
       
     } catch (error) {
-      res.json('Error while getting list of Students. Try again later.');
+      res.json('Error while getting list of Payments. Try again later.');
     }
   });
   

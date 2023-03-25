@@ -86,7 +86,7 @@ const HorizontalScrollCards = ({navigation}) => {
             <Image source={require('../assets/pay.png')} style={styles.image} />
             </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => {navigation.navigate('AllPayments')}}>
+        <TouchableOpacity onPress={() => {navigation.navigate('PayStuView')}}>
             <View style={styles.card}>
             <Text style={styles.title}>View</Text>
             <Text style={styles.title}>Payments</Text>
