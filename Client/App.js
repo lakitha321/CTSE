@@ -24,6 +24,7 @@ import Start2 from './screens/it20183004/start';
 import AttendanceScanner from './screens/it20183004/scanner';
 import AllAttendances from './screens/it20183004/allAttendances';
 import AttendanceDetails from './screens/it20183004/attendanceDetails';
+import ViewAttendance from './screens/it20183004/viewAttendance';
 
 import Start3 from './screens/it20202286/start';
 // import Notices from './screens/it20202286/Notices/addNotice';
@@ -71,6 +72,7 @@ export default function App() {
         <Stack.Screen name="AttendanceScanner" component={AttendanceScanner} />
         <Stack.Screen name="AllAttendances" component={AllAttendances} />
         <Stack.Screen name="AttendanceDetails" component={AttendanceDetails} />
+        <Stack.Screen name="ViewAttendance" component={ViewAttendance} />
 
         <Stack.Screen name="Start3" component={Start3} />
         {/* <Stack.Screen name="Notices" component={Notices} />

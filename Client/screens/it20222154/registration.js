@@ -32,6 +32,42 @@ const RegistrationForm = () => {
 
   const handleSubmit = async () => {
 
+    
+    // Validation
+  if (!studentName) {
+    Alert.alert('Validation Error', 'Please enter student name');
+    return;
+  }
+  if (!parentName) {
+    Alert.alert('Validation Error', 'Please enter parent name');
+    return;
+  }
+  if (!studentPhone || !/^[0-9]{10}$/i.test(studentPhone)) {
+    Alert.alert('Validation Error', 'Please enter valid student phone number');
+    return;
+  }
+  if (!parentPhone || !/^[0-9]{10}$/i.test(parentPhone)) {
+    Alert.alert('Validation Error', 'Please enter valid parent phone number');
+    return;
+  }
+  if (!nic || !/^[0-9]{9}[vVxX]$/i.test(nic)) {
+    Alert.alert('Validation Error', 'Please enter valid NIC number');
+    return;
+  }
+  if (!studentEmail || !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i.test(studentEmail)) {
+    Alert.alert('Validation Error', 'Please enter valid student email');
+    return;
+  }
+  if (!parentEmail || !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i.test(parentEmail)) {
+    Alert.alert('Validation Error', 'Please enter valid parent email');
+    return;
+  }
+  if (!password || password.length < 6) {
+    Alert.alert('Validation Error', 'Password should have at least 6 characters');
+    return;
+  }
+
+
     const newStudent = {
         student_name: studentName,
         parent_name: parentName,

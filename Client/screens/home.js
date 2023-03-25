@@ -43,7 +43,7 @@ const HorizontalScrollCards = ({navigation}) => {
           logged:route.params.logged
         })
         else if(id == 3)
-        navigation.navigate('AttendanceScanner')
+        navigation.navigate('ViewAttendance',{logged:route.params.logged})
         else if(id == 4)
         navigation.navigate('HomeWork')
         else if(id == 5)

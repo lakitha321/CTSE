@@ -3,9 +3,7 @@ import { StyleSheet, View, Text, FlatList, TouchableOpacity, Button, Alert,Scrol
 import { useRoute } from '@react-navigation/native';
 import axios from 'axios';
 
-
-
-const StylishSelection = ({ navigation }) => {
+const StylishSelection = () => {
   const route = useRoute();
   const [selectedItem, setSelectedItem] = useState(null);
   const [method, setMethod] = useState();
@@ -24,7 +22,7 @@ const StylishSelection = ({ navigation }) => {
   const refreshContent = () => {
     function getData() {
       axios
-        .get(`https://ctse-node-server.herokuapp.com/attendance/getAll`)
+        .get(`https://ctse-node-server.herokuapp.com/attendance/getBySid/${route.params.logged._id}`)
         .then((res) => {
           setData(res.data);
         })
@@ -35,65 +33,49 @@ const StylishSelection = ({ navigation }) => {
     getData();
   }
 
-  const handleDelete = (id) => {
-    Alert.alert(
-        'Confirm',
-        'Are you sure you want to delete this attendance detail?',
-        [
-          {
-            text: 'Cancel',
-            style: 'cancel',
-          },
-          {
-            text: 'Yes',
-            onPress: () => {
-              deleteAttendance(id);
-            },
-          },
-        ],
-    );
-  };
-  
-  const deleteAttendance = async (id) => {
-    await axios.delete(`https://ctse-node-server.herokuapp.com/attendance/delete/${id}`).then((res) => {
-        Alert.alert(res.data.status);
-        refreshContent();
-    }).catch((err) => {
-        alert(err);
-    })
-  }
-
   useEffect(() => {
     refreshContent();
   }, []);
 
   const handlePress = (item) => {
     setSelectedItem(item);
-    navigation.navigate('AttendanceDetails', {
-      sitem: item,
-    });
+    // navigation.navigate('AttendanceDetails', {
+    //   sitem: item,
+    // });
   };
 
   const renderItem = ({ item }) => {
     return (
       
-      <TouchableOpacity
-        style={[styles.item, selectedItem?._id === item._id && styles.selected]}
-        onPress={() => handlePress(item)}
-      >
+        <TouchableOpacity
+            style={[styles.item, selectedItem?._id === item._id && styles.selected]}
+            onPress={() => handlePress(item)}
+        >
         <View style={styles.row}>
-          <Text style={styles.label}>Name   :</Text>
+          <Text style={styles.label}>Name :</Text>
           <Text style={styles.itemText}>{item.name}</Text>
         </View>
         <View style={styles.row}>
-          <Text style={styles.label}>NIC       :</Text>
+          <Text style={styles.label}>NIC :</Text>
           <Text style={styles.itemText}>{item.nic}</Text>
         </View>
-        <TouchableOpacity style={styles.button} onPress={() => handleDelete(item._id)}>
-        <Text style={styles.buttonText}>Delete</Text>
-        </TouchableOpacity>
-      </TouchableOpacity>
-      
+        <View style={styles.row}>
+          <Text style={styles.label}>Class :</Text>
+          <Text style={styles.itemText}>{item.class}</Text>
+        </View>
+        <View style={styles.row}>
+          <Text style={styles.label}>Batch :</Text>
+          <Text style={styles.itemText}>{item.batch}</Text>
+        </View>
+        <View style={styles.row}>
+          <Text style={styles.label}>Date :</Text>
+          <Text style={styles.itemText}>{item.day} : {item.month} : {item.year}</Text>
+        </View>
+        <View style={styles.row}>
+          <Text style={styles.label}>Time :</Text>
+          <Text style={styles.itemText}>{item.time}</Text>
+        </View>
+      </TouchableOpacity>      
     );
   };
 
@@ -101,8 +83,7 @@ const StylishSelection = ({ navigation }) => {
     <View style={styles.container}>
       <ScrollView refreshControl={<RefreshControl onRefresh={onRefreshState} refreshing={refresfIconState}/>}>
       <View style={styles.container2}>
-      <Text style={styles.toptext1}>Attendance Collection</Text>
-        <Text style={styles.toptext}>Tap on a widget to view more details</Text>
+      <Text style={styles.toptext1}>Attendance Gallery</Text>
         <FlatList
           data={data}
           renderItem={renderItem}
@@ -115,6 +96,7 @@ const StylishSelection = ({ navigation }) => {
     </View>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {
@@ -145,7 +127,7 @@ const styles = StyleSheet.create({
   },
   item: {
     flex: 1,
-    height: 120,
+    height: 200,
     borderRadius: 10,
     backgroundColor: '#ccc',
     margin: 10,
