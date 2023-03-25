@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, FlatList, TouchableOpacity, Button, Alert,ScrollView,setRefresh} from 'react-native';
+import { StyleSheet, View, Text, FlatList, TouchableOpacity, Button, TextInput, Alert,ScrollView,setRefresh, SafeAreaView} from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import axios from 'axios';
 
@@ -12,6 +12,8 @@ const StudentList = ({ navigation }) => {
   const [data, setData] = useState();
   const [numColumns, setNumColumns] = useState(1);
   const [refresh, setRefresh] = useState(false);
+
+  const [search, setSearch] = useState("");
  
 
   useEffect(() => {
@@ -69,6 +71,7 @@ const StudentList = ({ navigation }) => {
   };
 
   const renderItem = ({ item }) => {
+    if(search === ""){
     return (
       <ScrollView>
       <TouchableOpacity
@@ -102,13 +105,56 @@ const StudentList = ({ navigation }) => {
       <Text></Text>
       </ScrollView>
     );
+  }
+  else if(item.student_name.toLowerCase().includes(search.toLowerCase())){
+    return (
+      <ScrollView>
+      <TouchableOpacity
+        // style={[styles.item, selectedItem?._id === item._id && styles.selected]}
+        onPress={() => handlePress(item)}
+      >
+        <View style={styles.row}>
+          <Text style={styles.label}>Name   :</Text>
+          <Text style={styles.itemText}>{item.student_name}</Text>
+        </View>
+        <View style={styles.row}>
+          <Text style={styles.label}>NIC     :</Text>
+          <Text style={styles.itemText}>{item.nic}</Text>
+        </View>
+        <View style={styles.row}>
+          <Text style={styles.label}>Batch   :</Text>
+          <Text style={styles.itemText}>{item.batch}</Text>
+        </View>
+        <View style={styles.row}>
+          <Text style={styles.label}>Phone   :</Text>
+          <Text style={styles.itemText}>{item.student_phone}</Text>
+        </View>
+        <View style={styles.row}>
+          <Text style={styles.label}>Email   :</Text>
+          <Text style={styles.itemText}>{item.student_email}</Text>
+        </View>
+        <TouchableOpacity style={styles.button} onPress={() => handleDelete(item._id)}>
+        <Text style={styles.buttonText}>Delete</Text>
+        </TouchableOpacity>
+      </TouchableOpacity>
+      <Text></Text>
+      </ScrollView>
+    );
+  }
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.container2}>
       <Text style={styles.toptext1}>Student List</Text>
-        
+      <SafeAreaView style={styles.safe}>
+        <TextInput
+        placeholder="Search by Name"
+          style={styles.input}
+          onChangeText={setSearch}
+        />
+    </SafeAreaView>
+    <Text></Text>
         <FlatList
           data={data}
           renderItem={renderItem}
@@ -199,6 +245,18 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
   },
+  input: {
+    height: 40,
+    width:200,
+    borderWidth: 1,
+    padding: 10,
+    borderRadius: 30,
+    borderColor:'gray'
+  },
+  safe:{
+    alignItems:'flex-end',
+    marginRight:10
+  }
 });
 
 export default StudentList;

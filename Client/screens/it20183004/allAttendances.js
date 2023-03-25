@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, FlatList, TouchableOpacity, Button, Alert,ScrollView,RefreshControl} from 'react-native';
+import { StyleSheet, View, Text, FlatList, TouchableOpacity, Button,TextInput, Alert,ScrollView,RefreshControl, SafeAreaView} from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import axios from 'axios';
 
@@ -12,6 +12,8 @@ const StylishSelection = ({ navigation }) => {
   const [data, setData] = useState();
   const [numColumns, setNumColumns] = useState(1);
   const [refresh, setRefresh] = useState(false);
+
+  const [search, setSearch] = useState("");
   
   const [refresfIconState, setRefresfIconState] = useState(false);
 
@@ -75,6 +77,7 @@ const StylishSelection = ({ navigation }) => {
   };
 
   const renderItem = ({ item }) => {
+    if(search === ""){
     return (
       
       <TouchableOpacity
@@ -95,14 +98,43 @@ const StylishSelection = ({ navigation }) => {
       </TouchableOpacity>
       
     );
+    }
+    else if(item.name.toLowerCase().includes(search.toLowerCase())){
+      return (
+      <TouchableOpacity
+      style={[styles.item, selectedItem?._id === item._id && styles.selected]}
+      onPress={() => handlePress(item)}
+    >
+      <View style={styles.row}>
+        <Text style={styles.label}>Name   :</Text>
+        <Text style={styles.itemText}>{item.name}</Text>
+      </View>
+      <View style={styles.row}>
+        <Text style={styles.label}>NIC       :</Text>
+        <Text style={styles.itemText}>{item.nic}</Text>
+      </View>
+      <TouchableOpacity style={styles.button} onPress={() => handleDelete(item._id)}>
+      <Text style={styles.buttonText}>Delete</Text>
+      </TouchableOpacity>
+    </TouchableOpacity>
+      )
+    }
   };
 
   return (
     <View style={styles.container}>
-      <ScrollView refreshControl={<RefreshControl onRefresh={onRefreshState} refreshing={refresfIconState}/>}>
       <View style={styles.container2}>
       <Text style={styles.toptext1}>Attendance Collection</Text>
         <Text style={styles.toptext}>Tap on a widget to view more details</Text>
+        <SafeAreaView style={styles.safe}>
+        <TextInput
+        placeholder="Search by Name"
+          style={styles.input}
+          onChangeText={setSearch}
+        />
+    </SafeAreaView>
+    <Text></Text>
+        <ScrollView refreshControl={<RefreshControl onRefresh={onRefreshState} refreshing={refresfIconState}/>}>
         <FlatList
           data={data}
           renderItem={renderItem}
@@ -110,8 +142,8 @@ const StylishSelection = ({ navigation }) => {
           numColumns={numColumns}
           key={numColumns} // Add key prop and update when numColumns changes
         />
+        </ScrollView>
       </View>
-      </ScrollView>
     </View>
   );
 };
@@ -194,6 +226,18 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
   },
+  input: {
+    height: 40,
+    width:200,
+    borderWidth: 1,
+    padding: 10,
+    borderRadius: 30,
+    borderColor:'gray'
+  },
+  safe:{
+    alignItems:'flex-end',
+    marginRight:10
+  }
 });
 
 export default StylishSelection;

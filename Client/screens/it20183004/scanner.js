@@ -48,11 +48,31 @@ export default function App() {
     await axios.post('https://ctse-node-server.herokuapp.com/attendance/upload', newAttendance)
     .then(response => {
       Alert.alert(response.data);
+      if(response.data === 'Saved'){
+      sendMail();
+      }
     })
     .catch(error => {
       Alert.alert(error);
     });
   }; 
+
+  const sendMail = async () => {
+    const newMail = {
+      p_email: student.parent_email,
+      s_email: student.student_email,
+      name: student.student_name
+    }
+    await axios.post('http://ctse-node-server.herokuapp.com/mailSend', newMail)
+    .then(response => {
+      if(response.data === 'Email sent'){
+        Alert.alert('Mail Sent!');
+      }
+    })
+    .catch(error => {
+      Alert.alert(error);
+    });
+  };
 
   // Request Camera Permission
   useEffect(() => {
