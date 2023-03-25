@@ -22,7 +22,7 @@ const StylishSelection = () => {
   const refreshContent = () => {
     function getData() {
       axios
-        .get(`https://ctse-node-server.herokuapp.com/attendance/getAll`)
+        .get(`https://ctse-node-server.herokuapp.com/attendance/getBySid/${route.params.logged._id}`)
         .then((res) => {
           setData(res.data);
         })
