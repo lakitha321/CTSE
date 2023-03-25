@@ -57,6 +57,15 @@ router.post(
       res.json('Error while getting list of Attendances. Try again later.');
     }
   });
+
+  router.get('/getBySid/:sid', async (req, res) => {
+    try {
+      const Attend = await Attendance.find({sid:req.params.sid});
+      res.send(Attend);
+    } catch (error) {
+      res.json('Error while getting list of Attendances. Try again later.');
+    }
+  });
   
   router.route('/delete/:id').delete(async (req, res) => {
   
