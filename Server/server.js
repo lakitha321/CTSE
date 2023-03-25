@@ -75,10 +75,12 @@ app.post('/sendmail', async (req, res) => {
 
 app.post('/mailSend', async (req, res) => {
 
+  var today = new Date();
+  var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+  var time = today.getHours() + ":" + today.getMinutes();
+
   const p_email = req.body.p_email;
   const s_email = req.body.s_email;
-  const date = req.body.date;
-  const time = req.body.time;
   const name = req.body.name;
 
   var transporter = nodemailer.createTransport({
