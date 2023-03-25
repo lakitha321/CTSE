@@ -11,6 +11,28 @@ const Form = () => {
 
   const handleSubmit = async () => {
 
+     // Validation
+
+     if (!title || title.length > 20) {
+      Alert.alert('Error', 'Title should have at least 1 character and no more than 20 characters');
+      return;
+    }
+
+     if (!desc || desc.length > 200) {
+      Alert.alert('Error', 'Description should have at least 1 character and no more than 200 characters');
+      return;
+    }
+  
+    if (!type) {
+      Alert.alert('Error', 'Please select a type');
+      return;
+    }
+  
+    if (!batch) {
+      Alert.alert('Error', 'Please select a batch');
+      return;
+    }
+
     const newNotice = {
         type,
         title,
@@ -25,7 +47,14 @@ const Form = () => {
     .catch(error => {
       Alert.alert('Registration Failed', 'Student registration failed. Please try again.');
     });
+
+
   };
+
+
+const handleInputChange = (name, value) => {
+  setFormData({ ...formData, [name]: value });
+};
 
   return (
     <View style={styles.container}>
