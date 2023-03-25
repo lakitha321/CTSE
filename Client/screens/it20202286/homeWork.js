@@ -35,7 +35,7 @@ const AllNotices = ({navigation}) => {
   return (
     <>
     <View style={styles.container2}>
-    <Text style={styles.title2}>Home Works</Text>
+    <Text style={styles.title2}>HomeWorks</Text>
       <ScrollView refreshControl={<RefreshControl onRefresh={onRefreshState} refreshing={refresfIconState}/>}>
         {notices &&
         <>
@@ -87,6 +87,9 @@ title2: {
   marginLeft:10,
   fontSize: 20,
   marginTop: 2,
+  textAlign: 'center',
+  fontWeight: 'bold',
+  color: 'blue'
 },
 profileText2: {
     fontSize: 16
@@ -94,7 +97,7 @@ profileText2: {
 desc: {
   // fontWeight: 'bold',
   marginLeft: 20,
-  fontSize: 12,
+  fontSize: 15,
   marginTop: 2,
 },
   item: {
@@ -117,13 +120,14 @@ desc: {
     textAlign: 'center',
     fontSize: 20,
     marginTop: 2,
+    fontWeight: 'bold',
   },
   card2: {
     marginLeft:5,
     marginTop:10,
     height: CARD_HEIGHT,
     marginRight: 10,
-    backgroundColor: '#fff',
+    backgroundColor: '#03BCF3',
     borderRadius: 10,
     shadowColor: '#000',
     shadowOffset: {

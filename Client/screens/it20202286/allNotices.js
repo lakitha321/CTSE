@@ -150,6 +150,9 @@ title2: {
   marginLeft:10,
   fontSize: 20,
   marginTop: 2,
+  textAlign: 'center',
+  fontWeight: 'bold',
+  color: '#03BCF3'
 },
 profileText2: {
     fontSize: 16
@@ -157,7 +160,7 @@ profileText2: {
 desc: {
   // fontWeight: 'bold',
   marginLeft: 20,
-  fontSize: 12,
+  fontSize: 13,
   marginTop: 2,
 },
   item: {
@@ -180,6 +183,7 @@ desc: {
     textAlign: 'center',
     fontSize: 20,
     marginTop: 2,
+    fontWeight: 'bold',
   },
   
   card2: {
@@ -187,9 +191,9 @@ desc: {
     marginTop:10,
     height: CARD_HEIGHT,
     marginRight: 10,
-    backgroundColor: '#fff',
+    backgroundColor: '#C7CCCE',
     borderRadius: 10,
-    shadowColor: '#000',
+    shadowColor: 'black',
     shadowOffset: {
       width: 0,
       height: 3,

@@ -4,7 +4,7 @@ import {useRoute} from '@react-navigation/native';
 import { View, ScrollView, StyleSheet, Text, Image, TouchableOpacity, RefreshControl } from 'react-native';
 
 const CARD_WIDTH = 100;
-const CARD_HEIGHT = 100;
+const CARD_HEIGHT = 120;
 
 const cards = [
   { id: 1, image: require('../assets/profile.png'), title: 'My Profile'},
@@ -95,7 +95,11 @@ const HorizontalScrollCards = ({navigation}) => {
           <TouchableOpacity key={card._id}>
             <View key={card._id} style={styles.card2}>
               <Text style={styles.title}>{card.title}</Text>
-              <Text style={styles.desc}>{card.description}</Text>
+              <Text style={styles.desc}>Type : {card.type}</Text>
+              <Text style={styles.desc}>Description : {card.description}</Text>
+              <Text style={styles.desc}>Batch : {card.year}</Text>
+              <Text style={styles.desc}>Posted Date : {card.date}</Text>
+              <Text style={styles.desc}>Posted Time : {card.time}</Text>
             </View>
           </TouchableOpacity>
           ))}
@@ -165,8 +169,8 @@ const styles = StyleSheet.create({
   },
   desc: {
     textAlign: 'center',
-    // fontWeight: 'bold',
-    fontSize: 12,
+    fontWeight: 'bold',
+    fontSize: 13,
     marginTop: 2,
   },
   title2: {
