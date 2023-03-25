@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
   },  
   toptext1: {
     fontSize: 25,
-    color: '#2c80ec',
+    color: 'black',
     textAlign: 'center',
     marginBottom: 10,
   },
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 200,
     borderRadius: 10,
-    backgroundColor: '#ccc',
+    backgroundColor: '#126180',
     margin: 10,
     padding: 10,
     alignItems: 'flex-start',
@@ -147,10 +147,11 @@ const styles = StyleSheet.create({
     width: 100,
     fontSize: 16,
     fontWeight: 'bold',
-    color: 'black',
+    color: 'white',
     textAlign: 'right', // aligns the text to the right
     marginRight: 10, // adds a margin to create some space between the colon and the text
     // textAlignLast: 'justify', // aligns the last line to create a vertical line
+    textAlign: 'left',
   },
   row: {
     flexDirection: 'row',
@@ -159,9 +160,10 @@ const styles = StyleSheet.create({
   },
   itemText: {
     fontSize: 16,
+    color: 'white',
   },
   selected: {
-    backgroundColor: '#2c80ec',
+    backgroundColor: 'black',
   },
   button: {
     backgroundColor: '#c70000',
