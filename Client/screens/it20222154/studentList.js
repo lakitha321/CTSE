@@ -15,6 +15,10 @@ const StudentList = ({ navigation }) => {
  
 
   useEffect(() => {
+    refreshContent();
+  }, []);
+
+  const refreshContent = () => {
     function getData() {
       axios
         .get(`https://ctse-node-server.herokuapp.com/students/getAll`)
@@ -26,7 +30,36 @@ const StudentList = ({ navigation }) => {
         });
     }
     getData();
-  }, []);
+  }
+
+  const handleDelete = (id) => {
+    Alert.alert(
+        'Confirm',
+        'Are you sure you want to delete this student?',
+        [
+          {
+            text: 'Cancel',
+            style: 'cancel',
+          },
+          {
+            text: 'Yes',
+            onPress: () => {
+              deleteStudent(id);
+            },
+          },
+        ],
+    );
+  };
+  
+  const deleteStudent = async (id) => {
+    await axios.delete(`https://ctse-node-server.herokuapp.com/students/delete/${id}`).then((res) => {
+      refreshContent();
+        Alert.alert('Deleted');
+        //setRefresh(!refresh);
+    }).catch((err) => {
+        alert(err);
+    })
+  }
 
   const handlePress = (item) => {
     setSelectedItem(item);
@@ -87,35 +120,6 @@ const StudentList = ({ navigation }) => {
     </View>
   );
 };
-
-
-const handleDelete = (id) => {
-  Alert.alert(
-      'Confirm',
-      'Are you sure you want to delete this student?',
-      [
-        {
-          text: 'Cancel',
-          style: 'cancel',
-        },
-        {
-          text: 'Yes',
-          onPress: () => {
-            deleteStudent(id);
-          },
-        },
-      ],
-  );
-};
-
-const deleteStudent = async (id) => {
-  await axios.delete(`https://ctse-node-server.herokuapp.com/students/delete/${id}`).then((res) => {
-      Alert.alert(res.status);
-      //setRefresh(!refresh);
-  }).catch((err) => {
-      alert(err);
-  })
-}
 
 const styles = StyleSheet.create({
   container: {

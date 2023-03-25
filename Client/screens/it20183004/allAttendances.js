@@ -35,6 +35,34 @@ const StylishSelection = ({ navigation }) => {
     getData();
   }
 
+  const handleDelete = (id) => {
+    Alert.alert(
+        'Confirm',
+        'Are you sure you want to delete this attendance detail?',
+        [
+          {
+            text: 'Cancel',
+            style: 'cancel',
+          },
+          {
+            text: 'Yes',
+            onPress: () => {
+              deleteAttendance(id);
+            },
+          },
+        ],
+    );
+  };
+  
+  const deleteAttendance = async (id) => {
+    await axios.delete(`https://ctse-node-server.herokuapp.com/attendance/delete/${id}`).then((res) => {
+        Alert.alert(res.data.status);
+        refreshContent();
+    }).catch((err) => {
+        alert(err);
+    })
+  }
+
   useEffect(() => {
     refreshContent();
   }, []);
@@ -87,35 +115,6 @@ const StylishSelection = ({ navigation }) => {
     </View>
   );
 };
-
-
-const handleDelete = (id) => {
-  Alert.alert(
-      'Confirm',
-      'Are you sure you want to delete this attendance detail?',
-      [
-        {
-          text: 'Cancel',
-          style: 'cancel',
-        },
-        {
-          text: 'Yes',
-          onPress: () => {
-            deleteAttendance(id);
-          },
-        },
-      ],
-  );
-};
-
-const deleteAttendance = async (id) => {
-  await axios.delete(`https://ctse-node-server.herokuapp.com/attendance/delete/${id}`).then((res) => {
-      Alert.alert(res.data.status);
-      refreshContent();
-  }).catch((err) => {
-      alert(err);
-  })
-}
 
 const styles = StyleSheet.create({
   container: {
