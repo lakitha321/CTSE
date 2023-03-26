@@ -7,6 +7,7 @@ const CARD_WIDTH = 100;
 const CARD_HEIGHT = 150;
 
 const AllNotices = ({navigation}) => {
+  const route = useRoute();
   const [notices, setData] = useState();
 
   const [refresfIconState, setRefresfIconState] = useState(false);
@@ -17,7 +18,7 @@ const AllNotices = ({navigation}) => {
 
   const refreshContent = async () => {
     async function getData(){
-      await axios.get(`https://ctse-node-server.herokuapp.com/notices/getByYear/AL2023/work`).then((res) => {
+      await axios.get(`https://ctse-node-server.herokuapp.com/notices/getByYear/${route.params.logged.batch}/work`).then((res) => {
           setData(res.data);
       }).catch((err) => {
           alert(err);

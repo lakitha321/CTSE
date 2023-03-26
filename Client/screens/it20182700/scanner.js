@@ -75,9 +75,9 @@ export default function App({navigation}) {
 
       {scanned && 
       <>
-      <Button title={'Tap to Scan'} onPress={() => setScanned(false)} color='blue' />
+      <Button title={'Tap to Scan'} onPress={() => setScanned(false)} color='black' />
       <Text></Text>
-      <Button title={'Fetch Student'} onPress={() => getStudent(text)} color='blue' />
+      <Button title={'Fetch Student'} onPress={() => getStudent(text)} color='black' />
       {student &&
       <>
         {student.student_name &&
@@ -117,6 +117,6 @@ const styles = StyleSheet.create({
     width: 300,
     overflow: 'hidden',
     borderRadius: 30,
-    backgroundColor: 'blue'
+    backgroundColor: 'transparent'
   }
 });

@@ -40,8 +40,8 @@ export default function App() {
 
     const newAttendance = {
         sid: student._id,
-        batch: 'tempbatch',
-        class_: 'Grade 12',
+        batch: student.batch,
+        class_: "#",
         name: student.student_name,
         nic: student.nic  
     }

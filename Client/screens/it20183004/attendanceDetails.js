@@ -53,10 +53,6 @@ const App = ({ navigation }) => {
         <Text style={styles.value}>{route.params.sitem.batch}</Text>
         </View>
         <View style={styles.row}>
-        <Text style={styles.label}>Class</Text>
-        <Text style={styles.value}>{route.params.sitem.class}</Text>
-        </View>
-        <View style={styles.row}>
         <Text style={styles.label}>Year</Text>
         <TextInput
         style={styles.input}

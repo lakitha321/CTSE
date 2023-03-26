@@ -4,7 +4,7 @@ import {useRoute} from '@react-navigation/native';
 import { View, ScrollView, StyleSheet, Text, Image, TouchableOpacity, RefreshControl } from 'react-native';
 
 const CARD_WIDTH = 100;
-const CARD_HEIGHT = 120;
+const CARD_HEIGHT = 130;
 
 const cards = [
   { id: 1, image: require('../assets/profile.png'), title: 'My Profile'},
@@ -45,7 +45,7 @@ const HorizontalScrollCards = ({navigation}) => {
         else if(id == 3)
         navigation.navigate('ViewAttendance',{logged:route.params.logged})
         else if(id == 4)
-        navigation.navigate('HomeWork')
+        navigation.navigate('HomeWork',{logged:route.params.logged})
         else if(id == 5)
         navigation.navigate('StudentAnualPayment',{
           logged:route.params.logged
@@ -114,11 +114,11 @@ const HorizontalScrollCards = ({navigation}) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 0.2,
+    flex: 0.25,
     marginTop: 20,
   },
   container2: {
-    flex: 0.8,
+    flex: 0.75,
     marginTop: 10,
   },
   card: {
@@ -169,7 +169,6 @@ const styles = StyleSheet.create({
   },
   desc: {
     textAlign: 'center',
-    fontWeight: 'bold',
     fontSize: 13,
     marginTop: 2,
   },
