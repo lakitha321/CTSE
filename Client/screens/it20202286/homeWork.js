@@ -100,6 +100,7 @@ desc: {
   marginLeft: 20,
   fontSize: 15,
   marginTop: 2,
+  color: 'white'
 },
   item: {
     flex: 1,
@@ -122,13 +123,14 @@ desc: {
     fontSize: 20,
     marginTop: 2,
     fontWeight: 'bold',
+    color: 'white'
   },
   card2: {
     marginLeft:5,
     marginTop:10,
     height: CARD_HEIGHT,
     marginRight: 10,
-    backgroundColor: '#03BCF3',
+    backgroundColor: '#00468b',
     borderRadius: 10,
     shadowColor: '#000',
     shadowOffset: {
