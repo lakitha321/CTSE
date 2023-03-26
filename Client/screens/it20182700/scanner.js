@@ -5,16 +5,16 @@ import axios from 'axios';
 
 export default function App({navigation}) {
 
-  const [hasPermission, setHasPermission] = useState(null);
-  const [scanned, setScanned] = useState(false);
-  const [text, setText] = useState('Not yet scanned')
+  const [permission, setpermission] = useState(null);
+  const [scanned, setScannedObject] = useState(false);
+  const [text, setScannedText] = useState('')
 
   const [student, setStudent] = useState(null);
 
-  const askForCameraPermission = () => {
+  const getCameraPermission = () => {
     (async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
-      setHasPermission(status === 'granted');
+      setpermission(status === 'granted');
     })()
   }
 
@@ -25,7 +25,6 @@ export default function App({navigation}) {
       );
       setStudent(response.data);
     } catch (error) {
-      // handle error
       alert(error.message);
     }
   };
@@ -36,46 +35,41 @@ export default function App({navigation}) {
     });
   };
 
-  // Request Camera Permission
-  useEffect(() => {
-    askForCameraPermission();
-  }, []);
-
-  // What happens when we scan the bar code
-  const handleBarCodeScanned = ({ type, data }) => {
-    setScanned(true);
-    setText(data)
-    console.log('Type: ' + type + '\nData: ' + data)
+  const handleBarCodeScanner = ({ type, data }) => {
+    setScannedObject(true);
+    setScannedText(data)
   };
 
-  // Check permissions and return the screens
-  if (hasPermission === null) {
+  useEffect(() => {
+    getCameraPermission();
+  }, []);
+
+  if (permission === null) {
     return (
       <View style={styles.container}>
         <Text>Requesting for camera permission</Text>
       </View>)
   }
-  if (hasPermission === false) {
+  if (permission === false) {
     return (
       <View style={styles.container}>
         <Text style={{ margin: 10 }}>No access to camera</Text>
-        <Button title={'Allow Camera'} onPress={() => askForCameraPermission()} />
+        <Button title={'Allow Camera'} onPress={() => getCameraPermission()} />
       </View>)
   }
 
-  // Return the View
   return (
     <View style={styles.container}>
-      <View style={styles.barcodebox}>
+      <View style={styles.barcodecontainer}>
         <BarCodeScanner
-          onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+          onBarCodeScanned={scanned ? undefined : handleBarCodeScanner}
           style={{ height: 400, width: 400 }} />
       </View>
       <Text style={styles.maintext}>{text}</Text>
 
       {scanned && 
       <>
-      <Button title={'Tap to Scan'} onPress={() => setScanned(false)} color='black' />
+      <Button title={'Tap to Scan'} onPress={() => setScannedObject(false)} color='black' />
       <Text></Text>
       <Button title={'Fetch Student'} onPress={() => getStudent(text)} color='black' />
       {student &&
@@ -110,7 +104,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     margin: 20,
   },
-  barcodebox: {
+  barcodecontainer: {
     alignItems: 'center',
     justifyContent: 'center',
     height: 300,

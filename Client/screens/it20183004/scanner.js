@@ -6,16 +6,16 @@ import axios from 'axios';
 
 export default function App() {
   const route = useRoute();
-  const [hasPermission, setHasPermission] = useState(null);
-  const [scanned, setScanned] = useState(false);
-  const [text, setText] = useState('Not yet scanned')
+  const [permission, setPermission] = useState(null);
+  const [scan, setScan] = useState(false);
+  const [text, setText] = useState('Not yet scan')
 
   const [student, setStudent] = useState(null);
 
   const askForCameraPermission = () => {
     (async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
-      setHasPermission(status === 'granted');
+      setPermission(status === 'granted');
     })()
   }
 
@@ -26,17 +26,11 @@ export default function App() {
       );
       setStudent(response.data);
     } catch (error) {
-      // handle error
       alert(error.message);
     }
   };
-  //confirming attendance
-  const confirmAttendance = async () => {
 
-    // var tempbatch = student.batch;
-    // if (!student.batch) {
-    //   tempbatch = 'batch';
-    // }
+  const confirmAttendance = async () => {
 
     const newAttendance = {
         sid: student._id,
@@ -74,26 +68,23 @@ export default function App() {
     });
   };
 
-  // Request Camera Permission
   useEffect(() => {
     askForCameraPermission();
   }, []);
 
-  // What happens when we scan the bar code
-  const handleBarCodeScanned = ({ type, data }) => {
-    setScanned(true);
+  const handleBarCodeScanner = ({ type, data }) => {
+    setScan(true);
     setText(data)
     console.log('Type: ' + type + '\nData: ' + data)
   };
 
-  // Check permissions and return the screens
-  if (hasPermission === null) {
+  if (permission === null) {
     return (
       <View style={styles.container}>
         <Text>Requesting for camera permission</Text>
       </View>)
   }
-  if (hasPermission === false) {
+  if (permission === false) {
     return (
       <View style={styles.container}>
         <Text style={{ margin: 10 }}>No access to camera</Text>
@@ -101,20 +92,19 @@ export default function App() {
       </View>)
   }
 
-  // Return the View
   return (
     <View style={styles.container}>
       <ScrollView>
       <View style={styles.barcodebox}>
         <BarCodeScanner
-          onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+          onBarCodeScanned={scan ? undefined : handleBarCodeScanner}
           style={{ height: 400, width: 400 }} />
       </View>
       <Text style={styles.maintext}>{text}</Text>
 
-      {scanned && 
+      {scan && 
       <>
-      <TouchableOpacity style={styles.buttonTap} onPress={() => setScanned(false)}>
+      <TouchableOpacity style={styles.buttonTap} onPress={() => setScan(false)}>
         <Text style={styles.buttonText}>Tap to Scan</Text>
       </TouchableOpacity>
       <Text></Text>
