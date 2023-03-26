@@ -60,10 +60,6 @@ const StylishSelection = () => {
           <Text style={styles.itemText}>{item.nic}</Text>
         </View>
         <View style={styles.row}>
-          <Text style={styles.label}>Class :</Text>
-          <Text style={styles.itemText}>{item.class}</Text>
-        </View>
-        <View style={styles.row}>
           <Text style={styles.label}>Batch :</Text>
           <Text style={styles.itemText}>{item.batch}</Text>
         </View>
